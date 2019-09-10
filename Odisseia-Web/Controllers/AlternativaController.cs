@@ -16,9 +16,9 @@ namespace OdisseiaWeb.Controllers
     {
         public AlternativaController() { }
         
-        public PartialViewResult ListAlternativas(int idQuestao)
+        public PartialViewResult ListAlternativas(Alternativa alternativa)
         {
-            return PartialView(DAOApi.GET(ApiCommands.NotImplementedCommand/*ListarAlternativas*/, idQuestao).ReadAsAsync<IEnumerable<Alternativa>>());
+            return PartialView(alternativa);
         }
         
         public bool Create(int idQuestao)

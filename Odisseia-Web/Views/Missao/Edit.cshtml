@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    -->
+</head>
+<body>
+
+    <div class="container">
+        <h2>Missão</h2>
+        <form action="/action_page.php">
+            <div class="form-group">
+                <label for="txtTitulo">Titulo:</label>
+                <input type="text" class="form-control" id="txtTitulo" name="text">
+            </div>
+            <div class="form-group">
+                <label for="txaDescricao">Descrição:</label>
+                <div class="md-form">
+                    <textarea style="resize: none; overflow-x: hidden;" class="form-control" id="txaDescricao" rows="5" cols="50" maxlength="1000" placeholder="Fale sobre a missão, liste materais de referência para os alunos, etc..."></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="datePrazo">Prazo:</label>
+                <input type="date" class="form-control" id="datePrazo" placeholder="Enter password" name="txaDescricao">
+            </div>
+        </form>
+        <div class="container">
+            <h2>Questões</h2>
+            <p>Pesquisar por palavras:</p>
+            <input class="form-control" id="txtPesquisaQuestao" type="text" placeholder="Palavra...">
+            <br>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Descrição</th>
+                        <th>Alternativas</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tblMissoes">
+                    <tr>
+                        <td>N</td>
+                        <td>inicio do enunciado...</td>
+                        <td>n</td>
+                        <td><input type="button" id="1" class="btnStatus btn btn-info" value="Editar" data-toggle="modal" data-target="#modalQuestao"></td>
+                    </tr>
+                    <tr>
+                        <td>N</td>
+                        <td>inicio do enunciado...</td>
+                        <td>n</td>
+                        <td><input type="button" id="1" class="btnStatus btn btn-info" value="Editar" data-toggle="modal" data-target="#modalQuestao"></td>
+                    </tr>
+                    <tr>
+                        <td>N</td>
+                        <td>inicio do enunciado...</td>
+                        <td>n</td>
+                        <td><input type="button" id="1" class="btnStatus btn btn-info" value="Editar" data-toggle="modal" data-target="#modalQuestao"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalQuestao" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="col">
+
+                        <div class="row d-flex flex-nowrap flex-row justify-content-between">
+                            <h4 class="modal-title">Questão [N]</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <div class="row">
+                            <h5 class="w-100">Tag:</h5>
+                            <p class="w-100">Pesquisar por palavras:</p>
+                            <input class="form-control" id="txtPesquisaTag" type="text" placeholder="Palavra...">
+                        </div>
+
+                        <div style="overflow: auto;" class="d-flex flex-nowrap flex-row justify-content-start row" id="tagList">
+
+                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag1">NomeTag1</div>
+                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag2">NomeTag2</div>
+                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag3">NomeTag3</div>
+                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag4">NomeTag4</div>
+                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag5">NomeTag5</div>
+                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag6">NomeTag6</div>
+                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag7">NomeTag7</div>
+                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag8">NomeTag8</div>
+                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag9">NomeTag9</div>
+                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag10" checked>NomeTag10</div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <label for="txaEnunciadoQuestao">Enunciado:</label>
+                    <div class="md-form">
+                        <textarea style="resize: none; overflow-x: hidden;" class="form-control" id="txaEnunciadoQuestao" rows="5" cols="50" maxlength="1000"></textarea>
+
+                    </div>
+
+                    <hr>
+
+
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Correto</th>
+                                <th>Resposta</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblMissoes">
+
+                            <tr>
+                                <td><input type="radio" name="alternariva" id="alternativa1" value="1"></td>
+                                <td><input type="text" id="alternativa1" class="form-control w-100" value="resposta1"></td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="radio" name="alternariva" id="alternativa2" value="1"></td>
+                                <td><input type="text" id="alternativa1" class="form-control w-100" value="resposta2"></td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="radio" name="alternariva" id="alternativa3" value="1"></td>
+                                <td><input type="text" id="alternativa1" class="form-control w-100" value="resposta3"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <button id="btnAddAlternativa" type="button" class="btn btn-success">Adicionar Alternativa</button>
+
+                </div>
+                <div class="modal-footer">
+                    <!--Mandar comando de edição aqui-->
+                    <button id="btnSalvarQuestao" type="button" class="btn btn-success" data-dismiss="modal">Salvar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+            $(document).ready(function(){
+
+              $(".btnStatus").click(function(){
+                  $("#idMissãoStatus").val("#"+this.id);
+              });
+
+              $("#btnMudarStatus").click(function() {
+                  var id = $("#idMissãoStatus").val();
+                if($(id).hasClass("btn-success")){
+                    $(id).removeClass("btn-success");
+                    $(id).addClass("btn-danger");
+                    $(id).val("Recuado");
+                }
+                else{
+                    $(id).removeClass("btn-danger");
+                    $(id).addClass("btn-success");
+                    $(id).val("Lançado");
+                }
+              });
+
+              $("#txtPesquisaQuestao").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#tblMissoes tr").filter(function() {
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+              });
+
+            });
+    </script>
+
+</body>
+</html>
