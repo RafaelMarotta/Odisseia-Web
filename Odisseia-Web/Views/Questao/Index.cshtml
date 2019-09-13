@@ -1,0 +1,25 @@
+﻿@model IEnumerable<OdisseiaWeb.Models.Questao>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Número</th>
+            <th>Descrição</th>
+            <th>Alternativas</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="tblQuestoes">
+        @{ int numero = 0; }
+        @foreach (var questao in Model)
+        {
+            <tr>
+                @{ numero++; }
+                <td>@numero</td>
+                <td>@Html.DisplayText($"{questao.Enunciado.Substring(0, 30)}...")</td>
+                <td>@questao.Alternativas.Count()</td>
+                <td><input type="button" id="btnEditarQuestao" class="btnStatus btn btn-info" value="@questao.Id" data-toggle="modal" data-target="#modalQuestao"></td>
+            </tr>
+        }
+    </tbody>
+</table>

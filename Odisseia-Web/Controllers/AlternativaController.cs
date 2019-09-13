@@ -9,42 +9,48 @@ using OdisseiaWeb.Models;
 using OdisseiaWeb.DAL;
 using System.Net.Http;
 using System.Net;
+using Newtonsoft.Json;
 
 namespace OdisseiaWeb.Controllers
 {
     public class AlternativaController : Controller
     {
         public AlternativaController() { }
-        
-        public PartialViewResult ListAlternativas(Alternativa alternativa)
+
+        [HttpPost]
+        public async Task<IActionResult> Listar(IEnumerable<Alternativa> alternativas)
         {
-            return PartialView(alternativa);
+            return View(alternativas);
         }
         
-        public bool Create(int idQuestao)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(int id)
         {
-            var newValue = DAOApi.POST(ApiCommands.NotImplementedCommand/*CadastarAlternativa*/, idQuestao);
-            return (newValue != null);
+            var result = DAOApi.POST(ApiCommands.NotImplementedCommand/*CadastarAlternativa*/, id);
+            if (result != null)
+            {
+                return RedirectToAction("Listar", "Questao");
+            }
+            throw new Exception("No result");
         }
 
-        public bool Edit(int id, [Bind("Id,FkQuestao,Texto,Correto")] Alternativa alternativa)
+        public void Edit(int id, Alternativa alternativa)
         {
-            if (id != alternativa.Id)
+            var result = DAOApi.PUT(ApiCommands.NotImplementedCommand/*EdidarAlternativa*/, id, alternativa).ReadAsAsync<object>();
+            result.Wait();
+            if (!result.IsCompletedSuccessfully && result.Exception != null)
             {
-                throw new KeyNotFoundException("Alternativa não encontrada");
+                throw new Exception($"{result.Status.ToString()}: {result.Exception.Message}");
             }
-
-            if (ModelState.IsValid)
-            {
-                var editedValue = DAOApi.PUT(ApiCommands.NotImplementedCommand/*EdidarAlternativa*/, id, alternativa).ReadAsAsync<object>();
-                return (editedValue != null);
-            }
-            throw new FormatException("Erro ao construir Alternativa");
         }
         
-        public HttpStatusCode Delete(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
         {
-            return DAOApi.DELETE(ApiCommands.NotImplementedCommand/*EdidarAlternativa*/, id);
+            DAOApi.DELETE(ApiCommands.NotImplementedCommand/*DeletarAlternativa*/, id);
+            return RedirectToAction("Listar", "Questao");
         }
     }
 }

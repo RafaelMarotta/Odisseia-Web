@@ -1,66 +1,41 @@
-﻿@model OdisseiaWeb.Models.Missao
+﻿@model IEnumerable<OdisseiaWeb.Models.Alternativa>
 
-<h4>Missao</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="id" />
-            <div class="form-group">
-                <label asp-for="titulo" class="control-label"></label>
-                <input asp-for="titulo" class="form-control" />
-                <span asp-validation-for="titulo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="descricao" class="control-label"></label>
-                <input asp-for="descricao" class="form-control" />
-                <span asp-validation-for="descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="fkMateria" class="control-label"></label>
-                <input asp-for="fkMateria" class="form-control" />
-                <span asp-validation-for="fkMateria" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="fkCriador" class="control-label"></label>
-                <input asp-for="fkCriador" class="form-control" />
-                <span asp-validation-for="fkCriador" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="dataCriacao" class="control-label"></label>
-                <input asp-for="dataCriacao" class="form-control" />
-                <span asp-validation-for="dataCriacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="dataPrazo" class="control-label"></label>
-                <input asp-for="dataPrazo" class="form-control" />
-                <span asp-validation-for="dataPrazo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="lancada" /> @Html.DisplayNameFor(model => model.lancada)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="excluido" /> @Html.DisplayNameFor(model => model.excluido)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
-</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="tblAlternativas">
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+        @foreach (OdisseiaWeb.Models.Alternativa alternativa in Model)
+        {
+            <form action="post" id="frmAlternativa">
+                <tr>
+
+                    <input type="hidden" name="@{Html.DisplayText($"altHdd{alternativa.Id}");}" value="@alternativa.Id">
+
+                    <td>
+                        <input type="radio" name="alternariva">
+                    </td>
+
+                    <td>
+                        <input type="text" id="@{Html.DisplayText($"altTxt{alternativa.Id}");}" name="@{Html.DisplayText($"altTxt{alternativa.Id}");}" class="form-control w-100" value="@alternativa.Texto">
+                    </td>
+
+                    <td>
+                        <button asp-action="Delete" asp-controller="Alternativa" class="btn btn-danger" type="submit">X</button>
+                    </td>
+                </tr>
+            </form>
+        }
+
+    </tbody>
+</table>
+
+<button asp-action="Create" asp-controller="Alternativa" class="btn btn-success">Adicionar alternativa</button>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

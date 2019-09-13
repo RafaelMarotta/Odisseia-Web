@@ -54,7 +54,7 @@ using Odisseia_Web.Models;
             WriteLiteral("<!DOCTYPE html>\r\n<html lang=\"en\">\r\n");
             EndContext();
             BeginContext(35, 1001, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "25f4b46a32384ee892fb133c37692309", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e057470f34c04e099fe7b86164f557c4", async() => {
                 BeginContext(41, 988, true);
                 WriteLiteral(@"
     <title>Missão</title>
@@ -84,7 +84,7 @@ using Odisseia_Web.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(1038, 3645, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2a8037dc595648ee863781a8a605389a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "850f653478fc49b7b8aaca2e84f10a8e", async() => {
                 BeginContext(1044, 3632, true);
                 WriteLiteral(@"
 
