@@ -1,0 +1,85 @@
+﻿@model IEnumerable<OdisseiaWeb.Models.Missao>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fkMateria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fkCriador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataCriacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataPrazo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lancada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.excluido)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fkMateria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fkCriador)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dataCriacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dataPrazo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lancada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.excluido)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

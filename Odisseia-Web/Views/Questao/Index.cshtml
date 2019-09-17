@@ -1,5 +1,10 @@
 ﻿@model IEnumerable<OdisseiaWeb.Models.Questao>
 
+
+<h2>Questões</h2>
+<p>Pesquisar por palavras:</p>
+<input class="form-control" id="txtPesquisaQuestao" type="text" placeholder="Palavra...">
+<br>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -18,7 +23,7 @@
                 <td>@numero</td>
                 <td>@Html.DisplayText($"{questao.Enunciado.Substring(0, 30)}...")</td>
                 <td>@questao.Alternativas.Count()</td>
-                <td><input type="button" id="btnEditarQuestao" class="btnStatus btn btn-info" value="@questao.Id" data-toggle="modal" data-target="#modalQuestao"></td>
+                <td><input type="button" class="btnEditarQuestao btnStatus btn btn-info" value="@questao.Id" data-toggle="modal" data-target="@Html.DisplayText($"#modalQuestao{questao.Id}")"></td>
             </tr>
         }
     </tbody>

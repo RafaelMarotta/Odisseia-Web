@@ -55,6 +55,6 @@ C:\Users\felip\Desktop\Odisseia-Web\Odisseia-Web\Odisseia-Web\obj\Debug\netcorea
 C:\Users\felip\Desktop\Odisseia-Web\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
 C:\Users\felip\Desktop\Odisseia-Web\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Razor\Views\Missao\Index.g.cshtml.cs
 C:\Users\felip\Desktop\Odisseia-Web\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Razor\Views\Missao\Edit.g.cshtml.cs
-C:\Users\felip\Desktop\Odisseia-Web\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Razor\Views\Questao\Create.g.cshtml.cs
 C:\Users\felip\Desktop\Odisseia-Web\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Razor\Views\Questao\Edit.g.cshtml.cs
 C:\Users\felip\Desktop\Odisseia-Web\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Razor\Views\Questao\Index.g.cshtml.cs
+C:\Users\felip\Desktop\Odisseia-Web\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Razor\Views\Alternativa\Edit.g.cshtml.cs

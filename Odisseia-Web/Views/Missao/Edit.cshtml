@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@model OdisseiaWeb.Models.Missao
+@using Newtonsoft.Json
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Bootstrap Example</title>
@@ -15,10 +18,20 @@
 
     <div class="container">
         <h2>Missão</h2>
-        <form action="/action_page.php">
+        <form asp-action="Salvar" asp-controller="Missao">
             <div class="form-group">
                 <label for="txtTitulo">Titulo:</label>
                 <input type="text" class="form-control" id="txtTitulo" name="text">
+            </div>
+            <div class="form-group">
+                <label for="txaDescricao">Descrição:</label>
+                <select id="cbxMateria" name="cbxMateria" class="form-control">
+                    @{var materias = JsonConvert.DeserializeObject<IList<OdisseiaWeb.Models.Materia>>(TempData["Materias"].ToString());}
+                    @foreach (var materia in materias)
+                    {
+                        <option value="@materia.id">@materia.nome</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label for="txaDescricao">Descrição:</label>
@@ -30,98 +43,17 @@
                 <label for="datePrazo">Prazo:</label>
                 <input type="date" class="form-control" id="datePrazo" placeholder="Enter password" name="txaDescricao">
             </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Salvar">
+            </div>
         </form>
         <div class="container">
-            <h2>Questões</h2>
-            <p>Pesquisar por palavras:</p>
-            <input class="form-control" id="txtPesquisaQuestao" type="text" placeholder="Palavra...">
-            <br>
-            <!--listar questões-->
+            <partial name="_Views_Questao_Index" model="Model.questoes" />
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modalQuestao" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="col">
-
-                        <div class="row d-flex flex-nowrap flex-row justify-content-between">
-                            <h4 class="modal-title">Questão [N]</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-
-                        <div class="row">
-                            <h5 class="w-100">Tag:</h5>
-                            <p class="w-100">Pesquisar por palavras:</p>
-                            <input class="form-control" id="txtPesquisaTag" type="text" placeholder="Palavra...">
-                        </div>
-
-                        <div style="overflow: auto;" class="d-flex flex-nowrap flex-row justify-content-start row" id="tagList">
-
-                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag1">NomeTag1</div>
-                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag2">NomeTag2</div>
-                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag3">NomeTag3</div>
-                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag4">NomeTag4</div>
-                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag5">NomeTag5</div>
-                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag6">NomeTag6</div>
-                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag7">NomeTag7</div>
-                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag8">NomeTag8</div>
-                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag9">NomeTag9</div>
-                            <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag10" checked>NomeTag10</div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <label for="txaEnunciadoQuestao">Enunciado:</label>
-                    <div class="md-form">
-                        <textarea style="resize: none; overflow-x: hidden;" class="form-control" id="txaEnunciadoQuestao" rows="5" cols="50" maxlength="1000"></textarea>
-
-                    </div>
-
-                    <hr>
-
-
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Correto</th>
-                                <th>Resposta</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tblAlternativas">
-
-                            <tr>
-                                <td><input type="radio" name="alternariva" id="alternativa1" value="1"></td>
-                                <td><input type="text" id="alternativa1" class="form-control w-100" value="resposta1"></td>
-                            </tr>
-
-                            <tr>
-                                <td><input type="radio" name="alternariva" id="alternativa2" value="1"></td>
-                                <td><input type="text" id="alternativa1" class="form-control w-100" value="resposta2"></td>
-                            </tr>
-
-                            <tr>
-                                <td><input type="radio" name="alternariva" id="alternativa3" value="1"></td>
-                                <td><input type="text" id="alternativa1" class="form-control w-100" value="resposta3"></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-                    <button id="btnAddAlternativa" type="button" class="btn btn-success">Adicionar Alternativa</button>
-
-                </div>
-                <div class="modal-footer">
-                    <!--Mandar comando de edição aqui-->
-                    <button id="btnSalvarQuestao" type="button" class="btn btn-success" data-dismiss="modal">Salvar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Modals -->
+    <partial name="_Views_Questao_Edit" model="Model.questoes" />
 
     <script>
             $(document).ready(function(){

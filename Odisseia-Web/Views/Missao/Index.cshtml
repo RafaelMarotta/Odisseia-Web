@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<OdisseiaWeb.Models.Missao>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Missão</title>
@@ -29,27 +31,17 @@
                 </tr>
             </thead>
             <tbody id="tblMissoes">
-                <tr>
-                    <td>[Matéria]</td>
-                    <td>[Título]</td>
-                    <td>dd/MM/yyyy</td>
-                    <td><input type="button" id="missão1" class="btnStatus btn" data-toggle="modal" data-target="#modalVerificar"></td>
-                    <td><button class="btn btn-info">Editar</button></td>
-                </tr>
-                <tr>
-                    <td>[Matéria]</td>
-                    <td>[Título]</td>
-                    <td>dd/MM/yyyy</td>
-                    <td><input type="button" id="missão2" class="btnStatus btn" data-toggle="modal" data-target="#modalVerificar"></td>
-                    <td><button class="btn btn-info">Editar</button></td>
-                </tr>
-                <tr>
-                    <td>[Matéria]</td>
-                    <td>[Título]</td>
-                    <td>dd/MM/yyyy</td>
-                    <td><input type="button" id="missão3" class="btnStatus btn" data-toggle="modal" data-target="#modalVerificar"></td>
-                    <td><button class="btn btn-info">Editar</button></td>
-                </tr>
+
+                @foreach (var missao in Model)
+                {
+                    <tr>
+                        <td>@missao.fkMateria</td>
+                        <td>@missao.titulo</td>
+                        <td>@missao.dataPrazo.ToString("dd/MM/yyyy")</td>
+                        <td><button type="button" id="@Html.Display($"missao{missao.id}")" class="btnStatus btn" value="@missao.id" data-toggle="modal" data-target="#modalVerificar"></button></td>
+                        <td><button class="btn btn-default">@Html.ActionLink("Editar", "Edit", "Missao", missao.id)</button></td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
@@ -68,7 +60,12 @@
                 </div>
                 <div class="modal-footer">
                     <!--Mandar comando de edição aqui-->
-                    <button id="btnMudarStatus" type="button" class="btn btn-default" data-dismiss="modal">Sim</button>
+
+                    <form asp-action="Lancado" asp-controller="Missao">
+                        <input type="hidden" id="missaoId" name="missaoId">
+                        <button type="submit" id="btnMudarStatus" class="btn btn-default" data-dismiss="modal">Sim</button>
+                    </form>
+
                     <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
                 </div>
             </div>
@@ -76,34 +73,43 @@
     </div>
 
     <script>
-$(document).ready(function(){
+        $(document).ready(function () {
 
-  $(".btnStatus").click(function(){
-      $("#idMissãoStatus").val("#"+this.id);
-  });
+            if ($(".btnStatus").val() == 1) {
+                $(id).addClass("btn-success");
+                $(id).innerHTML = "Lançado";
+            } else {
+                $(id).addClass("btn-danger");
+                $(id).innerHTML = "Recuado";
+            }
 
-  $("#btnMudarStatus").click(function() {
-      var id = $("#idMissãoStatus").val();
-    if($(id).hasClass("btn-success")){
-        $(id).removeClass("btn-success");
-        $(id).addClass("btn-danger");
-        $(id).val("Recuado");
-    }
-    else{
-        $(id).removeClass("btn-danger");
-        $(id).addClass("btn-success");
-        $(id).val("Lançado");
-    }
-  });
+              $(".btnStatus").click(function(){
+                  $("#idMissãoStatus").val("#" + this.id);
+                  $("#missaoId").val($(this).val());
+              });
 
-  $("#txtPesquisa").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#tblMissoes tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
+              $("#btnMudarStatus").click(function() {
+                  var id = $("#idMissãoStatus").val();
+                if($(id).hasClass("btn-success")){
+                    $(id).removeClass("btn-success");
+                    $(id).addClass("btn-danger");
+                    $(id).innerHTML = "Recuado";
+                }
+                else{
+                    $(id).removeClass("btn-danger");
+                    $(id).addClass("btn-success");
+                    $(id).innerHTML = "Lançado";
+                }
+              });
 
-});
+              $("#txtPesquisa").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#tblMissoes tr").filter(function() {
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+              });
+
+        });
     </script>
 
 </body>

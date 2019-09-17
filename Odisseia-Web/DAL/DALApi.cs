@@ -6,11 +6,11 @@ using Newtonsoft.Json;
 
 namespace OdisseiaWeb.DAL
 {
-    public class DAOApi
+    public class DALApi
     {
         public static string ApiUri { get; private set; } = "http://ec2-18-217-240-189.us-east-2.compute.amazonaws.com:6001";
 
-        public DAOApi() { }
+        public DALApi() { }
 
         private static string _getCommand(ApiCommands command)
         {

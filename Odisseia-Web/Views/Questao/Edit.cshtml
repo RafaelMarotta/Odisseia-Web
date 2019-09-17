@@ -1,61 +1,70 @@
 ﻿@model OdisseiaWeb.Models.Questao
 
-<div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            <div class="col">
+    <div class="modal fade" id="@Html.DisplayText($"modalQuestao{Model.Id}")" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="col">
 
-                <div class="row d-flex flex-nowrap flex-row justify-content-between">
-                    <h4 class="modal-title">Questão</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <div class="row d-flex flex-nowrap flex-row justify-content-between">
+                                <h4 class="modal-title">Questão</h4>
+
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <div class="row">
+                                <h5 class="w-100">Tag:</h5>
+                                <p class="w-100">Pesquisar por palavras:</p>
+                                <input class="form-control" id="txtPesquisaTag" type="text" placeholder="Palavra...">
+                            </div>
+
+                            <div style="overflow: auto;" class="d-flex flex-nowrap flex-row justify-content-start row" id="tagList">
+
+                                <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag1">NomeTag1</div>
+                                <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag2">NomeTag2</div>
+                                <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag3">NomeTag3</div>
+                                <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag4">NomeTag4</div>
+                                <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag5">NomeTag5</div>
+                                <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag6">NomeTag6</div>
+                                <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag7">NomeTag7</div>
+                                <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag8">NomeTag8</div>
+                                <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag9">NomeTag9</div>
+                                <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag10" checked>NomeTag10</div>
+
+                            </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <label for="txaEnunciadoQuestao">Enunciado:</label>
+                    <div class="md-form">
+                        <form method="post" asp-action="Edit" asp-controller="Questao">
+                            <input type="hidden" value="@Model.Id" name="questaoId">
+                            <label for="dificuldade">Dificuldade:</label>
+                            <input type="range" max="5" name="dificuldade" id="dificuldade" class="w-100">
+                            <textarea style="resize: none; overflow-x: hidden;" class="form-control" id="txaEnunciadoQuestao" rows="5" cols="50" maxlength="1000">
+                                @Model.Enunciado
+                            </textarea>
+                        </form>
+                    </div>
+
+                    <hr>
+
+                    <partial name="_Views_Alternativa_Edit" model="Model.Alternativas" />
+
+                </div>
+                <div class="modal-footer">
+                    <!--Mandar comando de edição aqui-->
+                    <button id="btnSalvar" type="submit" class="btn btn-success" data-dismiss="modal">Salvar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
 
-                <div class="row">
-                    <h5 class="w-100">Tag:</h5>
-                    <p class="w-100">Pesquisar por palavras:</p>
-                    <input class="form-control" id="txtPesquisaTag" type="text" placeholder="Palavra...">
-                </div>
-
-                <div style="overflow: auto;" class="d-flex flex-nowrap flex-row justify-content-start row" id="tagList">
-
-                    <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag1">NomeTag1</div>
-                    <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag2">NomeTag2</div>
-                    <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag3">NomeTag3</div>
-                    <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag4">NomeTag4</div>
-                    <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag5">NomeTag5</div>
-                    <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag6">NomeTag6</div>
-                    <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag7">NomeTag7</div>
-                    <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag8">NomeTag8</div>
-                    <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag9">NomeTag9</div>
-                    <div style="min-width: max-content;" class="d-flex flex-nowrap flex-row bd-highlight card text-white bg-info m-2 p-1"><input type="checkbox" class="ckxTag m-2" value="Tag10" checked>NomeTag10</div>
-
-                </div>
+                <script type="text/javascript">
+                    $("#btnSalvar").click(function () {
+                        (".frmAlternativa").submit();
+                    })
+                </script>
             </div>
         </div>
-        <div class="modal-body">
-            <label for="txaEnunciadoQuestao">Enunciado:</label>
-            <div class="md-form">
-                <textarea style="resize: none; overflow-x: hidden;" class="form-control" id="txaEnunciadoQuestao" rows="5" cols="50" maxlength="1000">
-                    @Model.Enunciado
-                </textarea>
-            </div>
-
-            <hr>
-
-            <partial name="_Views_Alternativa_Edit" model="Model.Alternativas" />
-
-        </div>
-        <div class="modal-footer">
-            <!--Mandar comando de edição aqui-->
-            <button id="btnSalvar" asp-action="Edit" asp-controller="Questao" type="button" class="btn btn-success" data-dismiss="modal">Salvar</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-            <input type="hidden" value="@Model.Id" name="questaoId">
-        </div>
-        <script type="text/javascript">
-            $("#btnSalvar").click(function () {
-                $("#frmAlternativa").submit();
-            })
-        </script>
     </div>
-</div>
+    
 

@@ -25,9 +25,9 @@ namespace OdisseiaWeb.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id)
+        public async Task<IActionResult> Create(int questaoId)
         {
-            var result = DAOApi.POST(ApiCommands.NotImplementedCommand/*CadastarAlternativa*/, id);
+            var result = DALApi.POST(ApiCommands.NotImplementedCommand/*CadastarAlternativa*/, questaoId);
             if (result != null)
             {
                 return RedirectToAction("Listar", "Questao");
@@ -35,21 +35,30 @@ namespace OdisseiaWeb.Controllers
             throw new Exception("No result");
         }
 
-        public void Edit(int id, Alternativa alternativa)
+        [HttpPost]
+        public async Task<IActionResult> Edit(int altId, int altFkQuestao, string altTexto, bool altCorreto)
         {
-            var result = DAOApi.PUT(ApiCommands.NotImplementedCommand/*EdidarAlternativa*/, id, alternativa).ReadAsAsync<object>();
+            Alternativa value = new Alternativa
+            {
+                Id = altId,
+                FkQuestao = altFkQuestao,
+                Texto = altTexto,
+                Correto = altCorreto
+            };
+            var result = DALApi.PUT(ApiCommands.NotImplementedCommand/*EdidarAlternativa*/, value.Id, value).ReadAsAsync<object>();
             result.Wait();
             if (!result.IsCompletedSuccessfully && result.Exception != null)
             {
-                throw new Exception($"{result.Status.ToString()}: {result.Exception.Message}");
+                return BadRequest($"{result.Status.ToString()}: {result.Exception.Message}");
             }
+            return Ok();
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int altId)
         {
-            DAOApi.DELETE(ApiCommands.NotImplementedCommand/*DeletarAlternativa*/, id);
+            DALApi.DELETE(ApiCommands.NotImplementedCommand/*DeletarAlternativa*/, altId);
             return RedirectToAction("Listar", "Questao");
         }
     }

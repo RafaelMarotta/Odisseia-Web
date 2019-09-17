@@ -11,24 +11,25 @@
 
         @foreach (OdisseiaWeb.Models.Alternativa alternativa in Model)
         {
-            <form action="post" id="frmAlternativa">
-                <tr>
+            <tr>  
+                <form action="post" class="frmAlternativa" asp-action="Edit" asp-controller="Alternativa">
 
-                    <input type="hidden" name="@{Html.DisplayText($"altHdd{alternativa.Id}");}" value="@alternativa.Id">
+                    <input type="hidden" name="altFkQuestao" value="@alternativa.FkQuestao">
+                    <input type="hidden" name="altId" value="@alternativa.Id">
 
                     <td>
-                        <input type="radio" name="alternariva">
+                        <input type="radio" name="altCorreto">
                     </td>
 
                     <td>
-                        <input type="text" id="@{Html.DisplayText($"altTxt{alternativa.Id}");}" name="@{Html.DisplayText($"altTxt{alternativa.Id}");}" class="form-control w-100" value="@alternativa.Texto">
+                        <input type="text" id="altTxt" name="altTexto" class="form-control w-100" value="@alternativa.Texto">
                     </td>
 
                     <td>
                         <button asp-action="Delete" asp-controller="Alternativa" class="btn btn-danger" type="submit">X</button>
                     </td>
-                </tr>
-            </form>
+                </form>
+            </tr>
         }
 
     </tbody>
