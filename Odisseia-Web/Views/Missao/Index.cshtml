@@ -20,6 +20,8 @@
         <p>Pesquisar por palavras:</p>
         <input class="form-control" id="txtPesquisa" type="text" placeholder="Search..">
         <br>
+        @Html.ActionLink("Nova Missao", "Create", "Missao", null, new { @class = "btn btn-success" })
+        <br>
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -38,7 +40,7 @@
                         <td>@missao.fkMateria</td>
                         <td>@missao.titulo</td>
                         <td>@missao.dataPrazo.ToString("dd/MM/yyyy")</td>
-                        <td><button type="button" id="@Html.Display($"missao{missao.id}")" class="btnStatus btn" value="@missao.id" data-toggle="modal" data-target="#modalVerificar"></button></td>
+                        <td><button type="button" id="@Html.Display(missao.id.ToString())" class="btnStatus btn" value="@Html.Display(missao.lancada? "1" : "0")" data-toggle="modal" data-target="#modalVerificar"></button></td>
                         <td><button class="btn btn-default">@Html.ActionLink("Editar", "Edit", "Missao", missao.id)</button></td>
                     </tr>
                 }

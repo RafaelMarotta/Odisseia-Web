@@ -18,15 +18,16 @@
 
     <div class="container">
         <h2>Missão</h2>
-        <form asp-action="Salvar" asp-controller="Missao">
+        <form asp-action="Save" asp-controller="Missao">
+            <input type="hidden" id="idMissao" name="idMissao" value="@Model.id">
             <div class="form-group">
                 <label for="txtTitulo">Titulo:</label>
-                <input type="text" class="form-control" id="txtTitulo" name="text">
+                <input type="text" class="form-control" id="txtTitulo" name="txtTitulo" value="@Model.titulo">
             </div>
             <div class="form-group">
                 <label for="txaDescricao">Descrição:</label>
                 <select id="cbxMateria" name="cbxMateria" class="form-control">
-                    @{var materias = JsonConvert.DeserializeObject<IList<OdisseiaWeb.Models.Materia>>(TempData["Materias"].ToString());}
+                    @{var materias = (IList<OdisseiaWeb.Models.Materia>)TempData["Materias"]; }
                     @foreach (var materia in materias)
                     {
                         <option value="@materia.id">@materia.nome</option>
@@ -36,12 +37,14 @@
             <div class="form-group">
                 <label for="txaDescricao">Descrição:</label>
                 <div class="md-form">
-                    <textarea style="resize: none; overflow-x: hidden;" class="form-control" id="txaDescricao" rows="5" cols="50" maxlength="1000" placeholder="Fale sobre a missão, liste materais de referência para os alunos, etc..."></textarea>
+                    <textarea style="resize: none; overflow-x: hidden;" class="form-control" name="txaDescricao" id="txaDescricao" rows="5" cols="50" maxlength="1000" placeholder="Fale sobre a missão, liste materais de referência para os alunos, etc...">
+                        @Model.descricao
+                    </textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label for="datePrazo">Prazo:</label>
-                <input type="date" class="form-control" id="datePrazo" placeholder="Enter password" name="txaDescricao">
+                <input type="date" value="@Model.dataPrazo" class="form-control" id="datePrazo" name="datePrazo" placeholder="Enter password">
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-success" value="Salvar">

@@ -9,6 +9,7 @@ using OdisseiaWeb.Models;
 using Newtonsoft.Json;
 using OdisseiaWeb.DAL;
 using Microsoft.AspNetCore.Http;
+using System.Net;
 
 namespace Odisseia_Web.Controllers
 {
@@ -18,17 +19,23 @@ namespace Odisseia_Web.Controllers
         public MissaoController() { }
 
         // GET: Missaos
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(DALApi.GET(ApiCommands.NotImplementedCommand/*listarMissao*/));
+            var result = DALApi.GET(ApiCommands.NotImplementedCommand/*ListarMissao*/, 1/*Id do usuario da sessão*/);
+            IList<Missao> missoes = JsonConvert.DeserializeObject<IList<Missao>>(result.ReadAsStringAsync().ToString());
+            return View(missoes);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id)
+        public IActionResult Edit(int id)
         {
             var result = DALApi.GET(ApiCommands.NotImplementedCommand/*PegarMissao*/, id);
             Missao missao = JsonConvert.DeserializeObject<Missao>(result.ReadAsStringAsync().ToString());
+
+            result = DALApi.GET(ApiCommands.NotImplementedCommand/*ListarMaterias*/, 1/*Id do usuario da sessão*/);
+            IList<Materia> materias = JsonConvert.DeserializeObject<IList<Materia>>(result.ReadAsStringAsync().ToString());
+            TempData.Add("Materias", materias);
 
             if (missao == null)
             {
@@ -40,7 +47,7 @@ namespace Odisseia_Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Lancado(int missaoId)
+        public IActionResult Lancado(int missaoId)
         {
             var result = DALApi.POST(ApiCommands.NotImplementedCommand/*MudarLançarMissao*/, missaoId);
 
@@ -51,137 +58,41 @@ namespace Odisseia_Web.Controllers
 
             return Ok();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Salvar(IFormCollection collection)
+        public IActionResult Save(IFormCollection collection)
         {
+            var result = DALApi.GET(ApiCommands.NotImplementedCommand/*PegarMissao*/, int.Parse(collection["idMissao"].ToString()));
+            Missao missao = JsonConvert.DeserializeObject<Missao>(result.ReadAsStringAsync().ToString());
 
+            missao.titulo = collection["txtTitulo"].ToString();
+            missao.fkMateria = int.Parse(collection["cbxMateria"].ToString());
+            missao.descricao = collection["txaDescricao"].ToString();
+            missao.dataPrazo = DateTime.Parse(collection["datePrazo"]);
+
+            DALApi.POST(ApiCommands.NotImplementedCommand/*SalvarMissao*/, missao);
+
+            return Index();
         }
 
-        // GET: Missaos/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var missao = await _context.Missao
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (missao == null)
-            {
-                return NotFound();
-            }
-
-            return View(missao);
-        }
-
-        // GET: Missaos/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create()
         {
-            return View();
+            var result = DALApi.POST(ApiCommands.NotImplementedCommand/*CriarMissao*/, 1/*Id do usuario da sessão*/);
+            Missao missao = JsonConvert.DeserializeObject<Missao>(result.ReadAsStringAsync().ToString());
+
+            return Edit(missao.id);
         }
 
-        // POST: Missaos/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,titulo,descricao,fkMateria,fkCriador,dataCriacao,dataPrazo,lancada,excluido")] Missao missao)
+        public IActionResult Delete(int id)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(missao);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(missao);
-        }
+            var result = DALApi.DELETE(ApiCommands.DeletarMissao, id);
 
-        // GET: Missaos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var missao = await _context.Missao.FindAsync(id);
-            if (missao == null)
-            {
-                return NotFound();
-            }
-            return View(missao);
-        }
-
-        // POST: Missaos/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,titulo,descricao,fkMateria,fkCriador,dataCriacao,dataPrazo,lancada,excluido")] Missao missao)
-        {
-            if (id != missao.id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(missao);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MissaoExists(missao.id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(missao);
-        }
-
-        // GET: Missaos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var missao = await _context.Missao
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (missao == null)
-            {
-                return NotFound();
-            }
-
-            return View(missao);
-        }
-
-        // POST: Missaos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var missao = await _context.Missao.FindAsync(id);
-            _context.Missao.Remove(missao);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool MissaoExists(int id)
-        {
-            return _context.Missao.Any(e => e.id == id);
+            return Index();
         }
     }
 }

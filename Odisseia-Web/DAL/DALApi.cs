@@ -60,14 +60,14 @@ namespace OdisseiaWeb.DAL
             return response.Content;
         }
 
-        public static object POST(ApiCommands command, object value)
+        public static HttpContent POST(ApiCommands command, object value)
         {
             HttpResponseMessage response = _getClient().PostAsJsonAsync(_getCommand(command), value).Result;
-            response.EnsureSuccessStatusCode();
-            using (WebClient wc = new WebClient())
+            if (!response.IsSuccessStatusCode)
             {
-                return JsonConvert.DeserializeObject(wc.DownloadString(response.Headers.Location));
+                throw new HttpRequestException();
             }
+            return response.Content;
         }
 
         public static HttpContent PUT(ApiCommands command, int id, object value)
