@@ -19,12 +19,12 @@ using Odisseia_Web;
 #line default
 #line hidden
 #line 2 "C:\Users\felip\Desktop\Odisseia-Web\Odisseia-Web\Odisseia-Web\Views\_ViewImports.cshtml"
-using Odisseia_Web.Models;
+using Models;
 
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7091c65830b0329e613be026ede8a57552863778", @"/Views/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"0ea73377fb6dd9b715e6671399f498760c06a6aa", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"65cedbab3503f524a02d535edfb8f5e4d8a4c21d", @"/Views/_ViewImports.cshtml")]
     public class Views__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

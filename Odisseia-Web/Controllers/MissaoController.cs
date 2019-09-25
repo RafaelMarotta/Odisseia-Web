@@ -2,95 +2,91 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using OdisseiaWeb.Models;
-using Newtonsoft.Json;
-using OdisseiaWeb.DAL;
 using Microsoft.AspNetCore.Http;
-using System.Net;
+using Microsoft.AspNetCore.Mvc;
+using Models;
+using Models.Missao;
+using Microsoft.Extensions.Primitives;
+using Models.Alternativa;
+using Models.Questao;
+using System.Text;
+using OdisseiaWeb.DAL;
 
-namespace Odisseia_Web.Controllers
+namespace Controllers
 {
     public class MissaoController : Controller
     {
-
-        public MissaoController() { }
-
-        // GET: Missaos
         public IActionResult Index()
         {
-            var result = DALApi.GET(ApiCommands.NotImplementedCommand/*ListarMissao*/, 1/*Id do usuario da sessão*/);
-            IList<Missao> missoes = JsonConvert.DeserializeObject<IList<Missao>>(result.ReadAsStringAsync().ToString());
-            return View(missoes);
+            return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id)
-        {
-            var result = DALApi.GET(ApiCommands.NotImplementedCommand/*PegarMissao*/, id);
-            Missao missao = JsonConvert.DeserializeObject<Missao>(result.ReadAsStringAsync().ToString());
-
-            result = DALApi.GET(ApiCommands.NotImplementedCommand/*ListarMaterias*/, 1/*Id do usuario da sessão*/);
-            IList<Materia> materias = JsonConvert.DeserializeObject<IList<Materia>>(result.ReadAsStringAsync().ToString());
-            TempData.Add("Materias", materias);
-
-            if (missao == null)
-            {
-                return NotFound();
-            }
-
-            return View("_View_MIssao_Edit", missao);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Lancado(int missaoId)
-        {
-            var result = DALApi.POST(ApiCommands.NotImplementedCommand/*MudarLançarMissao*/, missaoId);
-
-            if (result == null)
-            {
-                return NotFound();
-            }
-
-            return Ok();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Save(IFormCollection collection)
-        {
-            var result = DALApi.GET(ApiCommands.NotImplementedCommand/*PegarMissao*/, int.Parse(collection["idMissao"].ToString()));
-            Missao missao = JsonConvert.DeserializeObject<Missao>(result.ReadAsStringAsync().ToString());
-
-            missao.titulo = collection["txtTitulo"].ToString();
-            missao.fkMateria = int.Parse(collection["cbxMateria"].ToString());
-            missao.descricao = collection["txaDescricao"].ToString();
-            missao.dataPrazo = DateTime.Parse(collection["datePrazo"]);
-
-            DALApi.POST(ApiCommands.NotImplementedCommand/*SalvarMissao*/, missao);
-
-            return Index();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public IActionResult Create()
         {
-            var result = DALApi.POST(ApiCommands.NotImplementedCommand/*CriarMissao*/, 1/*Id do usuario da sessão*/);
-            Missao missao = JsonConvert.DeserializeObject<Missao>(result.ReadAsStringAsync().ToString());
-
-            return Edit(missao.id);
+            return View("_View_Missao_Create");
         }
-
+        
+        /* 
+         Rules for Create:
+            -> The name of the inputs:
+                "{ value1 }{ value2 { value2.1 } }{ value3 }{ value4 }"
+                * value1 = The Id auto-generated of the input class;
+                * value2 (Optional) = The class who the input class belongs;
+                    * value2.1 = That class Id;
+                * value3 = The class name;
+                * value4 = The input name;
+            Obs: all values starts in upper case;
+            Ex:
+            name = "Id3Questao2AlternativaTexto",
+            name = "Id1QuestaoEnunciado", etc...
+        */
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public IActionResult Create(IFormCollection collection)
         {
-            var result = DALApi.DELETE(ApiCommands.DeletarMissao, id);
+            //Add Questões
+            List<KeyValuePair<string, StringValues>> questoesEnunciado = collection.Where(q => q.Key.ToString().Contains("QuestaoEnunciado")).ToList<KeyValuePair<string, StringValues>>();
+            List<KeyValuePair<string, StringValues>> questoesDificuldade = collection.Where(q => q.Key.ToString().Contains("QuestaoDificuldade")).ToList<KeyValuePair<string, StringValues>>();
+
+            List<QuestaoCreateDTO> questoesList = new List<QuestaoCreateDTO>();
+
+            foreach(KeyValuePair<string, StringValues> qstE in questoesEnunciado)
+            {
+                int idQ = int.Parse(qstE.Key.ToString()[0].ToString());
+                KeyValuePair<string, StringValues> qstD = questoesDificuldade.First(q => int.Parse(q.Key.ToString()[0].ToString()) == idQ);
+
+                if(qstD.Key != null)
+                {
+                    List<KeyValuePair<string, StringValues>> alternativasTexto = collection.Where(a => a.Key.ToString().Contains($"Questao{idQ}AlternativaTexto")).ToList<KeyValuePair<string, StringValues>>();
+                    List<KeyValuePair<string, StringValues>> alternativasCorreto = collection.Where(a => a.Key.ToString().Contains($"Questao{idQ}AlternativaCorreto")).ToList<KeyValuePair<string, StringValues>>();
+
+                    List<AlternativaCreateDTO> alternativasList = new List<AlternativaCreateDTO>();
+
+                    foreach(KeyValuePair<string, StringValues> altT in alternativasTexto)
+                    {
+                        int idA = int.Parse(altT.Key.ToString()[0].ToString());
+                        KeyValuePair<string, StringValues> altC = alternativasCorreto.First(a => int.Parse(a.Key.ToString()[0].ToString()) == idA);
+                        
+                        if(altC.Key != null)
+                        {
+                            alternativasList.Add(new AlternativaCreateDTO { texto = altT.Value, correto = bool.Parse(altC.Value) });
+                        }
+                    }
+
+                    questoesList.Add(new QuestaoCreateDTO { alternativas = alternativasList, dificuldade = int.Parse(qstD.Value), enunciado = qstE.Value });
+                }
+            }
+
+            MissaoCreateDTO missao = new MissaoCreateDTO
+            {
+                titulo = collection["MissaoTitulo"],
+                descricao = collection["MissaoDescricao"],
+                fkCriador = 1/*id do usuario da sessao*/,
+                fkMateria = int.Parse(collection["MissaoMateria"]),
+                questoes = questoesList
+            };
+
+            DALApi.POST(ApiCommands.CadastarMissao, missao);
 
             return Index();
         }

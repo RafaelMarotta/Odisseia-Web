@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Odisseia-Web",
+    "\\Odisseia-Web\\Controllers",
+    "\\Odisseia-Web\\DAL",
+    "\\Odisseia-Web\\Models",
+    "\\Odisseia-Web\\Models\\Alternativa",
+    "\\Odisseia-Web\\Models\\Missao",
+    "\\Odisseia-Web\\Models\\Questao"
+  ],
+  "SelectedNode": "\\Odisseia-Web\\Models\\Alternativa\\AlternativaCreateDTO.cs",
+  "PreviewInSolutionExplorer": false
+}

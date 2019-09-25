@@ -16,17 +16,17 @@ namespace OdisseiaWeb.DAL
         {
             switch (command)
             {
-                case ApiCommands.CadastarMissao: return "/api/Missao";
-                case ApiCommands.LancarMissao: return "/api/Missao/Lancar";
-                case ApiCommands.CardsMissaoAluno: return "/api​/Missao​/Aluno​/";
-                case ApiCommands.InfoBasicaMissao: return "/api/Missao/MissaoInfo/";
-                case ApiCommands.DeletarMissao: return "/api/Missao/";
-                case ApiCommands.ListarAluno: return "/api/Usuario/Alunos";
-                case ApiCommands.UsuarioAluno: return "/api/Usuario/";
-                case ApiCommands.AlterarUsuario: return "/api/Usuario/";
-                case ApiCommands.DeletarUsuario: return "/api/Usuario/";
-                case ApiCommands.LoginUsuario: return "/api/Usuario/Login";
-                case ApiCommands.CriarUsuario: return "/api/Usuario";
+                case ApiCommands.CadastarMissao: return "/api/Missao"; break;
+                case ApiCommands.LancarMissao: return "/api/Missao/Lancar"; break;
+                case ApiCommands.CardsMissaoAluno: return "/api​/Missao​/Aluno​/"; break;
+                case ApiCommands.InfoBasicaMissao: return "/api/Missao/MissaoInfo/"; break;
+                case ApiCommands.DeletarMissao: return "/api/Missao/"; break;
+                case ApiCommands.ListarAluno: return "/api/Usuario/Alunos"; break;
+                case ApiCommands.UsuarioAluno: return "/api/Usuario/"; break;
+                case ApiCommands.AlterarUsuario: return "/api/Usuario/"; break;
+                case ApiCommands.DeletarUsuario: return "/api/Usuario/"; break;
+                case ApiCommands.LoginUsuario: return "/api/Usuario/Login"; break;
+                case ApiCommands.CriarUsuario: return "/api/Usuario"; break;
                 default: throw new NotImplementedException();
             }
         }
@@ -62,7 +62,7 @@ namespace OdisseiaWeb.DAL
 
         public static HttpContent POST(ApiCommands command, object value)
         {
-            HttpResponseMessage response = _getClient().PostAsJsonAsync(_getCommand(command), value).Result;
+            HttpResponseMessage response = _getClient().PostAsJsonAsync(_getCommand(command), JsonConvert.SerializeObject(value)).Result;
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException();
@@ -72,7 +72,7 @@ namespace OdisseiaWeb.DAL
 
         public static HttpContent PUT(ApiCommands command, int id, object value)
         {
-            HttpResponseMessage response = _getClient().PostAsJsonAsync($"{_getCommand(command)}{id}", value).Result;
+            HttpResponseMessage response = _getClient().PostAsJsonAsync($"{_getCommand(command)}{id}", JsonConvert.SerializeObject(value)).Result;
             response.EnsureSuccessStatusCode();
             return response.Content;
         }

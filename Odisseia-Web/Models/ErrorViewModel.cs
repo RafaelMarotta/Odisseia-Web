@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 
-namespace Odisseia_Web.Models
+namespace Models
 {
     public class ErrorViewModel
     {
