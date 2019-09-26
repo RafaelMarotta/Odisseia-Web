@@ -1,37 +1,29 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace OdisseiaWeb.DAL
 {
     public class DALApi
     {
         public static string ApiUri { get; private set; } = "http://ec2-18-217-240-189.us-east-2.compute.amazonaws.com:6001";
+        private static Dictionary<ApiCommands, string> _command = new Dictionary<ApiCommands, string>{
+            { ApiCommands.CadastarMissao, "/api/Missao" },
+            { ApiCommands.LancarMissao, "/api/Missao/Lancar" },
+            { ApiCommands.CardsMissaoAluno, "/api​/Missao​/Aluno​/" },
+            { ApiCommands.InfoBasicaMissao, "/api/Missao/MissaoInfo/" },
+            { ApiCommands.DeletarMissao, "/api/Missao/" },
+            { ApiCommands.ListarAluno, "/api/Usuario/Alunos"},
+            { ApiCommands.UsuarioAluno, "/api/Usuario/" },
+            { ApiCommands.AlterarUsuario, "/api/Usuario/" },
+            { ApiCommands.DeletarUsuario, "/api/Usuario/" },
+            { ApiCommands.LoginUsuario, "/api/Usuario/Login" },
+            { ApiCommands.CriarUsuario, "/api/Usuario" }
+        };
 
-        public DALApi() { }
-
-        private static string _getCommand(ApiCommands command)
-        {
-            switch (command)
-            {
-                case ApiCommands.CadastarMissao: return "/api/Missao"; break;
-                case ApiCommands.LancarMissao: return "/api/Missao/Lancar"; break;
-                case ApiCommands.CardsMissaoAluno: return "/api​/Missao​/Aluno​/"; break;
-                case ApiCommands.InfoBasicaMissao: return "/api/Missao/MissaoInfo/"; break;
-                case ApiCommands.DeletarMissao: return "/api/Missao/"; break;
-                case ApiCommands.ListarAluno: return "/api/Usuario/Alunos"; break;
-                case ApiCommands.UsuarioAluno: return "/api/Usuario/"; break;
-                case ApiCommands.AlterarUsuario: return "/api/Usuario/"; break;
-                case ApiCommands.DeletarUsuario: return "/api/Usuario/"; break;
-                case ApiCommands.LoginUsuario: return "/api/Usuario/Login"; break;
-                case ApiCommands.CriarUsuario: return "/api/Usuario"; break;
-                default: throw new NotImplementedException();
-            }
-        }
-
-        private static HttpClient _getClient()
+        private static HttpClient _client()
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(ApiUri);
@@ -40,47 +32,28 @@ namespace OdisseiaWeb.DAL
             return client;
         }
 
-        public static HttpContent GET(ApiCommands command)
+        public static async Task<HttpResponseMessage> GET(ApiCommands command, object param)
         {
-            HttpResponseMessage response = _getClient().GetAsync(_getCommand(command)).Result;
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException();
-            }
-            return response.Content;
+            HttpResponseMessage response = await _client().GetAsync($"{ _command[command]}{param.ToString()}");
+            return response;
         }
 
-        public static HttpContent GET(ApiCommands command, int id)
+        public static async Task<HttpResponseMessage> POST(ApiCommands command, object value)
         {
-            HttpResponseMessage response = _getClient().GetAsync(_getCommand(command)).Result;
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException();
-            }
-            return response.Content;
+            HttpResponseMessage response = await _client().PostAsJsonAsync(_command[command], value); 
+            return response;
         }
 
-        public static HttpContent POST(ApiCommands command, object value)
+        public static async Task<HttpResponseMessage> PUT(ApiCommands command, object param, object value)
         {
-            HttpResponseMessage response = _getClient().PostAsJsonAsync(_getCommand(command), JsonConvert.SerializeObject(value)).Result;
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException();
-            }
-            return response.Content;
+            HttpResponseMessage response = await _client().PutAsJsonAsync($"{_command[command]}{param.ToString()}", value);
+            return response;
         }
 
-        public static HttpContent PUT(ApiCommands command, int id, object value)
+        public static async Task<HttpResponseMessage> DELETE(ApiCommands command, object param)
         {
-            HttpResponseMessage response = _getClient().PostAsJsonAsync($"{_getCommand(command)}{id}", JsonConvert.SerializeObject(value)).Result;
-            response.EnsureSuccessStatusCode();
-            return response.Content;
-        }
-
-        public static HttpStatusCode DELETE(ApiCommands command, int id)
-        {
-            HttpResponseMessage response = _getClient().DeleteAsync($"{_getCommand(command)}{id}").Result;
-            return response.StatusCode;
+            HttpResponseMessage response = await _client().DeleteAsync($"{_command[command]}{param.ToString()}");
+            return response;
         }
     }
 }

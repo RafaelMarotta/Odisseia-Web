@@ -11,6 +11,7 @@ using Models.Alternativa;
 using Models.Questao;
 using System.Text;
 using OdisseiaWeb.DAL;
+using System.Net.Http;
 
 namespace Controllers
 {
@@ -42,8 +43,11 @@ namespace Controllers
             name = "Id1QuestaoEnunciado", etc...
         */
         [HttpPost]
-        public IActionResult Create(IFormCollection collection)
+        [ActionName("Create")]
+        public async Task<IActionResult> CreateConfirmed(IFormCollection collection)
         {
+            UserSessionController.ValidateUser(HttpContext);
+
             //Add Questões
             List<KeyValuePair<string, StringValues>> questoesEnunciado = collection.Where(q => q.Key.ToString().Contains("QuestaoEnunciado")).ToList<KeyValuePair<string, StringValues>>();
             List<KeyValuePair<string, StringValues>> questoesDificuldade = collection.Where(q => q.Key.ToString().Contains("QuestaoDificuldade")).ToList<KeyValuePair<string, StringValues>>();
@@ -81,12 +85,17 @@ namespace Controllers
             {
                 titulo = collection["MissaoTitulo"],
                 descricao = collection["MissaoDescricao"],
-                fkCriador = 1/*id do usuario da sessao*/,
+                fkCriador = UserSessionController.GetUser(HttpContext).id,
                 fkMateria = int.Parse(collection["MissaoMateria"]),
                 questoes = questoesList
             };
 
-            DALApi.POST(ApiCommands.CadastarMissao, missao);
+            HttpResponseMessage result = await DALApi.POST(ApiCommands.CadastarMissao, missao);
+
+            if (!result.IsSuccessStatusCode)
+            {
+                return BadRequest();
+            }
 
             return Index();
         }

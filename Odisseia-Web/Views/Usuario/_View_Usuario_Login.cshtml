@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <environment include="Development,Production">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/general.css" />
+        <link rel="stylesheet" href="~/css/sideBar.css" />
+        <link rel="stylesheet" href="~/css/styleExtra.css" />
+    </environment>
+
+    <style>
+        /*Colors (vai pro .css padrão)*/
+        body {
+            background-image: url('~/images/background3.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .card {
+            background-color: rgba(22, 38, 53, 0.8);
+            top: 50%;
+            height: 100%;
+        }
+
+        .inputCustom {
+            background-color: transparent;
+            border-bottom-color: #FFFFFF;
+            border-top: none;
+            border-left: none;
+            border-right: none
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="white pb-30"><u>Login</u></h5>
+                        <form asp-action="Login" asp-controller="Usuario">
+                            <div class="form-group">
+                                <label class="cinza_secundary" for="email">Email:</label>
+                                <input type="email" class="form-control inputCustom" name="UsuarioLogin">
+                            </div>
+                            <div class="form-group">
+                                <label class="cinza_secundary" for="pwd">Senha:</label>
+                                <input type="password" class="form-control inputCustom" name="UsuarioSenha">
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-10 mb-10"
+                                    style="width: 100%; background-color: #213950; border: none;">
+                                Entrar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+
+</body>
+
+</html>
