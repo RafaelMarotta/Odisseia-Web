@@ -15,6 +15,12 @@ namespace Controllers
     public class UsuarioController : Controller
     {
         [HttpGet]
+        public async Task<IActionResult> LoginWrong(){
+            ViewData["error"] = "Login ou senha inválidos ! ";
+            return await Task.Run(() => View("_View_Usuario_Login"));
+        }
+
+        [HttpGet]
         public IActionResult Login()
         {
             return View("_View_Usuario_Login");
@@ -35,7 +41,7 @@ namespace Controllers
 
             if (!result.IsSuccessStatusCode)
             {
-                return BadRequest();
+                return RedirectToAction("LoginWrong","Usuario");
             }
 
             result.EnsureSuccessStatusCode();
@@ -44,17 +50,12 @@ namespace Controllers
 
             if (usuario == null)
             {
-                return BadRequest();
-            }
-
-            if (usuario.tipo == TipoUsuarioEnum.Aluno)
-            {
-                return BadRequest();
+                return RedirectToAction("LoginWrong","Usuario");
             }
 
             UserSessionController.SetUser(HttpContext, usuario);
 
-            return RedirectToAction("Home", "Home");
+            return RedirectToAction("Create", "Missao");
         }
 
         [HttpPost]

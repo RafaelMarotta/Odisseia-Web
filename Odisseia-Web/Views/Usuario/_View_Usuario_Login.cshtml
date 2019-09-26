@@ -21,7 +21,7 @@
     <style>
         /*Colors (vai pro .css padrão)*/
         body {
-            background-image: url('~/images/background3.jpg');
+            background-image: url('@Url.Content("~/images/background3.jpg")');
             background-size: cover;
             background-attachment: fixed;
         }
@@ -65,6 +65,7 @@
                                     style="width: 100%; background-color: #213950; border: none;">
                                 Entrar
                             </button>
+                            <p style="color:red"> @ViewData["error"] </p>
                         </form>
                     </div>
                 </div>
