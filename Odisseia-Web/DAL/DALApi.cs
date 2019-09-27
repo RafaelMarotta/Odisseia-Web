@@ -11,6 +11,8 @@ namespace OdisseiaWeb.DAL
         public static string ApiUri { get; private set; } = "http://ec2-18-217-240-189.us-east-2.compute.amazonaws.com:6001";
         private static Dictionary<ApiCommands, string> _command = new Dictionary<ApiCommands, string>{
             { ApiCommands.CadastarMissao, "/api/Missao" },
+            { ApiCommands.ListarMaterias, "/api/Materia" },
+            { ApiCommands.ListarCardMissao, "/api/Missao" },
             { ApiCommands.LancarMissao, "/api/Missao/Lancar" },
             { ApiCommands.CardsMissaoAluno, "/api​/Missao​/Aluno​/" },
             { ApiCommands.InfoBasicaMissao, "/api/Missao/MissaoInfo/" },
@@ -20,7 +22,9 @@ namespace OdisseiaWeb.DAL
             { ApiCommands.AlterarUsuario, "/api/Usuario/" },
             { ApiCommands.DeletarUsuario, "/api/Usuario/" },
             { ApiCommands.LoginUsuario, "/api/Usuario/Login" },
-            { ApiCommands.CriarUsuario, "/api/Usuario" }
+            { ApiCommands.RelatorioBasico, "api/Missao/RelatorioBasico" },
+            { ApiCommands.CriarUsuario, "/api/Usuario" },
+            { ApiCommands.LoginProfessor, "/api/Professor/Login" }
         };
 
         private static HttpClient _client()
@@ -32,6 +36,12 @@ namespace OdisseiaWeb.DAL
             return client;
         }
 
+        public static async Task<HttpResponseMessage> GET(ApiCommands command)
+        {
+            HttpResponseMessage response = await _client().GetAsync( _command[command]);
+            return response;
+        }
+
         public static async Task<HttpResponseMessage> GET(ApiCommands command, object param)
         {
             HttpResponseMessage response = await _client().GetAsync($"{ _command[command]}{param.ToString()}");
@@ -41,6 +51,12 @@ namespace OdisseiaWeb.DAL
         public static async Task<HttpResponseMessage> POST(ApiCommands command, object value)
         {
             HttpResponseMessage response = await _client().PostAsJsonAsync(_command[command], value); 
+            return response;
+        }
+
+        public static async Task<HttpResponseMessage> PUT(ApiCommands command, object value)
+        {
+            HttpResponseMessage response = await _client().PutAsJsonAsync(_command[command], value);
             return response;
         }
 

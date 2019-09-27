@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Models.Usuario;
 using Newtonsoft.Json;
+using Controllers.Exceptions;
 using System;
 
 namespace Controllers
@@ -29,7 +30,7 @@ namespace Controllers
         {
             if (GetUser(context) == null)
             {
-                throw new Exception("User not logged in");
+                throw new UsetNotLoggedException("_View_Usuario_Login");
             }
         }
     }

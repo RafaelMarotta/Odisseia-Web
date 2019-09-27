@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Controllers.Exceptions;
 
 namespace Controllers
 {
@@ -12,12 +13,16 @@ namespace Controllers
 
         public IActionResult Home()
         {
-            if (UserSessionController.GetUser(HttpContext) == null)
+            try
             {
-                return RedirectToAction("Login", "Usuario");
-            }
+                UserSessionController.ValidateUser(HttpContext);
 
-            return View("_View_Home_Home");
+                return View("_View_Home_Home");
+            }
+            catch (UsetNotLoggedException ex)
+            {
+                return View(ex.Message);
+            }
         }
 
         public IActionResult QuemSomos()

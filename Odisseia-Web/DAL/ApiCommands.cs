@@ -8,11 +8,15 @@
         InfoBasicaMissao,
         DeletarMissao,
         ListarAluno,
+        ListarMaterias,
         UsuarioAluno,
         AlterarUsuario,
         DeletarUsuario,
         LoginUsuario,
         CriarUsuario,
-        NotImplementedCommand
+        ListarCardMissao,
+        RelatorioBasico,
+        NotImplementedCommand,
+        LoginProfessor
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Models.Missao.MissaoCreateDTO
+﻿@model IList<Models.Materia.MateriaListaDTO>
 
 <style>
     .cursor-h:hover {
@@ -13,32 +13,33 @@
         <form asp-action="Create" asp-controller="Missao">
             <div class="form-group">
                 <label for="MissaoTitulo" class="control-label">Título:</label>
-                <input name="MissaoTitulo" class="form-control" />
+                <input name="MissaoTitulo" class="form-control" required/>
             </div>
             <div class="form-group">
                 <label for="MissaoDescricao" class="control-label">Descrição:</label>
-                <input name="MissaoDescricao" class="form-control" />
+                <input name="MissaoDescricao" class="form-control" required/>
             </div>
             <div class="form-group">
                 <label for="MissaoMateria" class="control-label">Matéria:</label>
-                <input name="MissaoMateria" class="form-control" />
+                <select name="MissaoMateria" class="form-control" required>
+                    @foreach(Models.Materia.MateriaListaDTO materia in Model)
+                    {
+                        <option value="@materia.id">@materia.nome</option>
+                    }
+                </select>
             </div>
             <div>
                 <label class="control-label">Questões</label><br>
-                <label id="btnAddQuestao" class="cursor-h btn btn-success" onclick="addQuestao()">Add Questão</label>
+                <label id="btnAddQuestao" class="cursor-h btn btn-info" onclick="addQuestao()">Add Questão</label>
                 <table class="table table-hover">
                     <tbody id="tblQuestoes"></tbody>
                 </table>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a action="Index">Back to List</a>
 </div>
 
 <script type="text/javascript">
@@ -58,12 +59,12 @@
                     </div>\n\
                     <div class="form-group">\n\
                         <label for="'+ idQ + 'QuestaoEnunciado" class="control-label">Enunciado:</label>\n\
-                        <textarea name="'+ idQ + 'QuestaoEnunciado" class="form-control" rows="5" style="resize: none;">\n\
+                        <textarea name="'+ idQ + 'QuestaoEnunciado" class="form-control" rows="5" style="resize: none;" required>\n\
                         </textarea>\n\
                     </div>\n\
                     <div class="form-group">\n\
                         <label class="control-label">Alternativas</label><br>\n\
-                        <label class="btn btn-success cursor-h" onclick="addAlternativa('+ idQ + ')">Add Questão</label>\n\
+                        <label class="btn btn-info cursor-h" onclick="addAlternativa('+ idQ + ')">Add Alternativa</label>\n\
                         <table class="table table-hover">\n\
                             <tbody id="tblQuestao'+ idQ + 'Alternativa">\n\
                             </tbody>\n\
@@ -83,7 +84,7 @@
         <tr>\n\
             <input type="hidden" name="'+ idA + 'Questao' + id + 'AlternativaCorreto" id="' + idA + 'Questao' + id + 'AlternativaCorreto" value="false">\n\
             <td><input style="width: 5vh;" type="checkbox" class="form-control" onclick="checkIt('+ idA + ',' + id + ')"></td>\n\
-            <td><input type="text" class="form-control" name="'+ idA + 'Questao' + id + 'AlternativaTexto"></td>\n\
+            <td><input type="text" class="form-control" name="'+ idA + 'Questao' + id + 'AlternativaTexto" required></td>\n\
         </tr>';
 
         document.getElementById("tblQuestao" + id + "Alternativa").insertAdjacentHTML("beforeend", result);

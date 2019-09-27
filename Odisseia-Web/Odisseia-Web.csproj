@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Relatorios\_View_Relatorio_Basico_Turma.cshtml">
+    <Content Update="Views\Relatorio\_View_Relatorio_Turma.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

@@ -1,0 +1,29 @@
+﻿@model IList<Models.Relatorio.RelatorioListDTO>
+
+<style>
+    .cursor-h:hover {
+        cursor: pointer;
+    }
+</style>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Missão</th>
+            <th scope="col">Aluno</th>
+            <th scope="col">Número de Acertos</th>
+            <th scope="col">Número de Erros</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Models.Relatorio.RelatorioListDTO relatorio in Model)
+        {
+        <tr>
+            <td>@relatorio.Missao</td>
+            <td>@relatorio.Aluno</td>
+            <td style="color: forestgreen">@relatorio.Acertos</td>
+            <td style="color: firebrick">@relatorio.Erros</td>
+        </tr>
+        }
+    </tbody>
+</table></div>

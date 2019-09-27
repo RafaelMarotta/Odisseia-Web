@@ -33,11 +33,11 @@ namespace Controllers
         {
             UsuarioLoginDTO usuarioLogin = new UsuarioLoginDTO
             {
-                login = collection["UsuarioLogin"],
+                login = collection["UsuarioLogin"].ToString().ToLower(),
                 senha = collection["UsuarioSenha"]
             };
 
-            HttpResponseMessage result = await DALApi.POST(ApiCommands.LoginUsuario, usuarioLogin);
+            HttpResponseMessage result = await DALApi.POST(ApiCommands.LoginProfessor, usuarioLogin);
 
             if (!result.IsSuccessStatusCode)
             {
@@ -55,10 +55,10 @@ namespace Controllers
 
             UserSessionController.SetUser(HttpContext, usuario);
 
-            return RedirectToAction("Create", "Missao");
+            return RedirectToAction("Index", "Missao");
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Logout()
         {
             UserSessionController.CleanUser(HttpContext);

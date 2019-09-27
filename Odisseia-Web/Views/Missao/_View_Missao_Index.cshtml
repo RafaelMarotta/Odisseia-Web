@@ -1,0 +1,44 @@
+﻿@model IList<Models.Missao.MissaoListarDTO>
+
+<p style="color:red"> @ViewData["error"] </p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Título</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Prazo</th>
+            <th scope="col">Novo Prazo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Models.Missao.MissaoListarDTO missao in Model)
+        {
+            <form asp-action="Lancar" asp-controller="Missao">
+                <tr>
+                    <input type="hidden" id="MissaoId" name="MissaoId" value="@missao.id" />
+                    <td>@missao.titulo</td>
+                    <td>@($"{missao.descricao.Substring(0, (missao.descricao.Length >= 25) ? 25 : missao.descricao.Length)}...")</td>
+                    <td>@missao.dataPrazo.ToString("dd/MM/yyyy hh:mm")</td>
+                    <a href="~/Views/Missao/_View_Missao_Index.cshtml">~/Views/Missao/_View_Missao_Index.cshtml</a>
+                    <td>
+                        <input name="MissaoPrazo" type="datetime-local" class="form-control" />
+                    </td>
+                    <td><button type="submit" class="btn btn-primary lancarmissaoid">Lançar</button></td>
+                </tr>
+            </form>
+        }
+    </tbody>
+</table>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".lancarmissaoid").click(function () {
+                $("#MissaoId").val() = $(this).val();
+            });
+        });
+    </script>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
