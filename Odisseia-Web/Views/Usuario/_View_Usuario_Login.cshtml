@@ -26,12 +26,6 @@
             background-attachment: fixed;
         }
 
-        .card {
-            background-color: rgba(22, 38, 53, 0.8);
-            top: 50%;
-            height: 100%;
-        }
-
         .inputCustom {
             background-color: transparent;
             border-bottom-color: #FFFFFF;
@@ -39,6 +33,34 @@
             border-left: none;
             border-right: none
         }
+        .card{ background-color: rgba(22, 38, 53, 0.8); border: 1px solid transparent; border-radius: 6px; margin-top:50%;}
+        .card > .card-link{ color: #333; }
+        .card > .card-link:hover{  text-decoration: none; }
+        .card > .card-link .card-img img{ border-radius: 6px 6px 0 0; }
+        .card .card-img{ position: relative; padding: 0; display: table; }
+        .card .card-img .card-caption{
+            position: absolute;
+            right: 0;
+            bottom: 16px;
+            left: 0;
+        }
+        .card .card-body{ display: table; width: 100%; padding: 12px; }
+        .card .card-header{ border-radius: 6px 6px 0 0; padding: 8px; }
+        .card .card-footer{ border-radius: 0 0 6px 6px; padding: 8px; }
+        .card .card-left{ position: relative; float: left; padding: 0 0 8px 0; }
+        .card .card-right{ position: relative; float: left; padding: 8px 0 0 0; }
+        .card .card-body h1:first-child,
+        .card .card-body h2:first-child,
+        .card .card-body h3:first-child,
+        .card .card-body h4:first-child,
+        .card .card-body .h1,
+        .card .card-body .h2,
+        .card .card-body .h3,
+        .card .card-body .h4{ margin-top: 0; }
+        .card .card-body .heading{ display: block;  }
+        .card .card-body .heading:last-child{ margin-bottom: 0; }
+
+        .card .card-body .lead{ text-align: center; }
     </style>
 
 </head>
@@ -49,29 +71,30 @@
         <div class="row">
             <div class="col-lg-4"></div>
             <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="white pb-30"><u>Login</u></h5>
+                <div class="card card-default">
+                    <div class="card-body card-6-6">
+                        <h4 class="white mb-30"><u>Login</u></h4>
                         <form asp-action="Login" asp-controller="Usuario">
                             <div class="form-group">
                                 <label class="cinza_secundary" for="email">Email:</label>
-                                <input type="email" class="form-control inputCustom" name="UsuarioLogin">
+                                <input type="email" class="form-control inputCustom white" name="UsuarioLogin">
                             </div>
                             <div class="form-group">
                                 <label class="cinza_secundary" for="pwd">Senha:</label>
-                                <input type="password" class="form-control inputCustom" name="UsuarioSenha">
+                                <input type="password" class="form-control inputCustom white" name="UsuarioSenha">
                             </div>
-                            <button type="submit" class="btn btn-primary mt-10 mb-10"
+                            <button type="submit" class="btn btn-primary mt-10 mb-5"
                                     style="width: 100%; background-color: #213950; border: none;">
                                 Entrar
                             </button>
                             <p style="color:red"> @ViewData["error"] </p>
                         </form>
                     </div>
+                    <div class="col-lg-4"></div>
                 </div>
-                <div class="col-lg-4"></div>
             </div>
         </div>
+    </div>
 
 </body>
 

@@ -17,14 +17,15 @@
 <body>
 
     <div class="sidebar">
-        <img src="~/images/Logo_Reduzida_Preta.png" class="img-fluid" style="max-width: 100px">
-        @Html.ActionLink("Home", "Home", "Home")
-        @Html.ActionLink("Missao", "Create", "Missao")
-        @Html.ActionLink("Logout", "Logout", "Usuario")
+        <center><img src="~/images/Logo_Reduzida_Preta.png" class="img-fluid" style="max-width: 100px"></center>
+        @Html.ActionLink("HOME", "Home", "Home")
+        @Html.ActionLink("MISSÃO", "Create", "Missao")
+        @Html.ActionLink("RELATÓRIO", "", "")
+        @Html.ActionLink("LOGOUT", "Logout", "Usuario")
     </div>
 
     <div class="container body-content">
-        <div style="margin-left: 25vw; overflow-x: hidden;">@RenderBody()</div>
+        <div style="margin-left: 6vw; margin-top: 1vw; overflow-x: hidden;">@RenderBody()</div>
     </div>
 
     <environment include="Development,Production">
