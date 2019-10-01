@@ -24,7 +24,8 @@ namespace OdisseiaWeb.DAL
             { ApiCommands.LoginUsuario, "/api/Usuario/Login" },
             { ApiCommands.RelatorioBasico, "api/Missao/RelatorioBasico" },
             { ApiCommands.CriarUsuario, "/api/Usuario" },
-            { ApiCommands.LoginProfessor, "/api/Professor/Login" }
+            { ApiCommands.LoginProfessor, "/api/Professor/Login" },
+            { ApiCommands.ListarTags, "/api/Tag" }
         };
 
         private static HttpClient _client()

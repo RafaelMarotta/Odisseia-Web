@@ -64,7 +64,7 @@ namespace Controllers
 
                 result.EnsureSuccessStatusCode();
 
-                IList<MateriaListaDTO> materias = JsonConvert.DeserializeObject<IList<MateriaListaDTO>>(await result.Content.ReadAsStringAsync());
+                IList<MateriaListarDTO> materias = JsonConvert.DeserializeObject<IList<MateriaListarDTO>>(await result.Content.ReadAsStringAsync());
 
                 if (materias == null)
                 {

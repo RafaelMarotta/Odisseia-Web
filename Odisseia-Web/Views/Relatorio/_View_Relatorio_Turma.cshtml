@@ -1,4 +1,4 @@
-﻿@model IList<Models.Relatorio.RelatorioListDTO>
+﻿@model IList<Models.Relatorio.RelatorioListarDTO>
 
 <style>
     .cursor-h:hover {
@@ -16,13 +16,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(Models.Relatorio.RelatorioListDTO relatorio in Model)
+        @foreach(Models.Relatorio.RelatorioListarDTO relatorio in Model)
         {
         <tr>
-            <td>@relatorio.Missao</td>
-            <td>@relatorio.Aluno</td>
-            <td style="color: forestgreen">@relatorio.Acertos</td>
-            <td style="color: firebrick">@relatorio.Erros</td>
+            <td>@relatorio.missao</td>
+            <td>@relatorio.aluno</td>
+            <td style="color: forestgreen">@relatorio.acertos</td>
+            <td style="color: firebrick">@relatorio.erros</td>
         </tr>
         }
     </tbody>

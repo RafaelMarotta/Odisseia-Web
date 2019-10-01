@@ -17,6 +17,7 @@
         ListarCardMissao,
         RelatorioBasico,
         NotImplementedCommand,
-        LoginProfessor
+        LoginProfessor,
+        ListarTags
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Models.Materia
 {
-    public class MateriaListaDTO
+    public class MateriaListarDTO
     {
         public int id { get; set; }
         public string nome { get; set; }
