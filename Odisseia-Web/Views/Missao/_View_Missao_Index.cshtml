@@ -1,6 +1,14 @@
 ﻿@model IList<Models.Missao.MissaoListarDTO>
 
-<p style="color:red"> @ViewData["error"] </p>
+
+@try
+{
+        <p style="color:red"> @ViewData["errorController"].ToString() </p>
+}
+catch (NullReferenceException)
+{
+}
+
 <table class="table table-hover">
     <thead>
         <tr>
@@ -21,7 +29,7 @@
                     <td>@missao.dataPrazo.ToString("dd/MM/yyyy hh:mm")</td>
                     <a href="~/Views/Missao/_View_Missao_Index.cshtml">~/Views/Missao/_View_Missao_Index.cshtml</a>
                     <td>
-                        <input name="MissaoPrazo" type="datetime-local" class="form-control" />
+                        <input name="MissaoPrazo" type="datetime-local" min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-ddThh:mm:ss")" class="form-control" required />
                     </td>
                     <td><button type="submit" class="btn btn-primary lancarmissaoid">Lançar</button></td>
                 </tr>
@@ -30,15 +38,15 @@
     </tbody>
 </table>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".lancarmissaoid").click(function () {
-                $("#MissaoId").val() = $(this).val();
-            });
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".lancarmissaoid").click(function () {
+            $("#MissaoId").val() = $(this).val();
         });
-    </script>
+    });
+</script>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 

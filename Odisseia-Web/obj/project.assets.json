@@ -12537,11 +12537,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\felip\\Desktop\\teste\\Odisseia-Web\\Odisseia-Web\\Odisseia-Web.csproj",
+      "projectUniqueName": "C:\\Users\\felip\\Desktop\\Odisseia-Web\\Odisseia-Web\\Odisseia-Web.csproj",
       "projectName": "Odisseia-Web",
-      "projectPath": "C:\\Users\\felip\\Desktop\\teste\\Odisseia-Web\\Odisseia-Web\\Odisseia-Web.csproj",
+      "projectPath": "C:\\Users\\felip\\Desktop\\Odisseia-Web\\Odisseia-Web\\Odisseia-Web.csproj",
       "packagesPath": "C:\\Users\\felip\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\felip\\Desktop\\teste\\Odisseia-Web\\Odisseia-Web\\obj\\",
+      "outputPath": "C:\\Users\\felip\\Desktop\\Odisseia-Web\\Odisseia-Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
