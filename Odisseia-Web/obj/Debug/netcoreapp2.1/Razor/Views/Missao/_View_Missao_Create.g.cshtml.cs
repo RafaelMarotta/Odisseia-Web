@@ -57,7 +57,7 @@ using Models;
             WriteLiteral("\r\n<style>\r\n    .cursor-h:hover {\r\n        cursor: pointer;\r\n    }\r\n</style>\r\n\r\n<h2>Cadastro Missao</h2>\r\n<hr />\r\n<div class=\"row container\">\r\n    <div class=\"col-md-4\">\r\n        ");
             EndContext();
             BeginContext(224, 1443, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "58012f12706b4d59a30e9b4c8bca8d66", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6dfe82d5019946a9be3279d53cc669a0", async() => {
                 BeginContext(274, 639, true);
                 WriteLiteral(@"
             <div class=""form-group"">
@@ -83,7 +83,7 @@ using Models;
                 WriteLiteral("                        ");
                 EndContext();
                 BeginContext(1039, 50, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d32dfcdade5c464db4cce03dd90787fb", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a3061aac6dc44050bc0deea24a29c3c8", async() => {
                     BeginContext(1068, 12, false);
 #line 27 "C:\Users\felipe.tertuliano\Desktop\Odisseia-Web\Odisseia-Web\Views\Missao\_View_Missao_Create.cshtml"
                                                Write(materia.nome);
