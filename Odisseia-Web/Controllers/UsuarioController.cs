@@ -15,8 +15,10 @@ namespace Controllers
     public class UsuarioController : Controller
     {
         [HttpGet]
-        public async Task<IActionResult> LoginWrong(){
-            ViewData["error"] = "Login ou senha inválidos ! ";
+        public async Task<IActionResult> LoginWrong()
+        {
+            ViewData["error"] = true;
+            ViewData["errorMessage"] = "Login ou senha inválidos!";
             return await Task.Run(() => View("_View_Usuario_Login"));
         }
 

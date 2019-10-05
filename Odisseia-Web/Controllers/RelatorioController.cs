@@ -21,7 +21,8 @@ namespace Controllers
 
                 if (!result.IsSuccessStatusCode)
                 {
-                    ViewData["error"] = "Erro de conexão, Tente novamente mais tarde";
+                    ViewData["error"] = true;
+                    ViewData["errorMessage"] = "Erro de conexão, Tente novamente mais tarde";
                     return RedirectToAction("Index", "Missao");
                 }
 
@@ -31,7 +32,7 @@ namespace Controllers
 
                 return View("_View_Relatorio_Turma", relatorio);
             }
-            catch (UsetNotLoggedException ex)
+            catch (UserNotLoggedException ex)
             {
                 return RedirectToAction("Logout", "Usuario");
             }

@@ -19,7 +19,7 @@ namespace Controllers
 
                 return View("_View_Home_Home");
             }
-            catch (UsetNotLoggedException ex)
+            catch (UserNotLoggedException ex)
             {
                 return View(ex.Message);
             }

@@ -1,13 +1,13 @@
 ﻿@model IList<Models.Missao.MissaoListarDTO>
 
-
 @try
 {
-        <p style="color:red"> @ViewData["errorController"].ToString() </p>
+    if (bool.Parse(ViewData["error"].ToString()))
+    {
+        <p style="color:red"> @ViewData["errorMessage"].ToString() </p>
+    }
 }
-catch (NullReferenceException)
-{
-}
+catch (Exception) { }
 
 <table class="table table-hover">
     <thead>
@@ -27,7 +27,6 @@ catch (NullReferenceException)
                     <td>@missao.titulo</td>
                     <td>@($"{missao.descricao.Substring(0, (missao.descricao.Length >= 25) ? 25 : missao.descricao.Length)}...")</td>
                     <td>@missao.dataPrazo.ToString("dd/MM/yyyy hh:mm")</td>
-                    <a href="~/Views/Missao/_View_Missao_Index.cshtml">~/Views/Missao/_View_Missao_Index.cshtml</a>
                     <td>
                         <input name="MissaoPrazo" type="datetime-local" min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-ddThh:mm:ss")" class="form-control" required />
                     </td>
@@ -37,14 +36,6 @@ catch (NullReferenceException)
         }
     </tbody>
 </table>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".lancarmissaoid").click(function () {
-            $("#MissaoId").val() = $(this).val();
-        });
-    });
-</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

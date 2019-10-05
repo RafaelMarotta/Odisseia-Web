@@ -31,7 +31,8 @@ namespace Controllers
 
                 if (!result.IsSuccessStatusCode)
                 {
-                    ViewData["error"] = "Erro de conexão, Tente novamente mais tarde";
+                    ViewData["error"] = true;
+                    ViewData["errorMessage"] = "Erro de conexão, Tente novamente mais tarde";
                     return RedirectToAction("Logout", "Usuario");
                 }
 
@@ -41,7 +42,7 @@ namespace Controllers
 
                 return View("_View_Missao_Index", missoes);
             }
-            catch (UsetNotLoggedException ex)
+            catch (UserNotLoggedException ex)
             {
                 return RedirectToAction("Logout", "Usuario");
             }
@@ -58,7 +59,8 @@ namespace Controllers
 
                 if (!result.IsSuccessStatusCode)
                 {
-                    ViewData["error"] = "Erro de conexão, Tente novamente mais tarde";
+                    ViewData["error"] = true;
+                    ViewData["errorMessage"] = "Erro de conexão, Tente novamente mais tarde";
                     return RedirectToAction("Index", "Missao");
                 }
 
@@ -68,13 +70,14 @@ namespace Controllers
 
                 if (materias == null)
                 {
-                    ViewData["error"] = "Erro de conexão, Tente novamente mais tarde";
+                    ViewData["error"] = true;
+                    ViewData["errorMessage"] = "Erro de conexão, Tente novamente mais tarde";
                     return RedirectToAction("Index", "Missao");
                 }
 
                 return View("_View_Missao_Create", materias);
             }
-            catch (UsetNotLoggedException ex)
+            catch (UserNotLoggedException ex)
             {
                 return RedirectToAction("Logout", "Usuario");
             }
@@ -148,13 +151,14 @@ namespace Controllers
 
                 if (!result.IsSuccessStatusCode)
                 {
-                    ViewData["error"] = "Erro de conexão, Tente novamente mais tarde";
+                    ViewData["error"] = true;
+                    ViewData["errorMessage"] = "Erro ao criar missão, Tente novamente mais tarde";
                     return RedirectToAction("Index", "Missao");
                 }
 
                 return await Index();
             }
-            catch (UsetNotLoggedException ex)
+            catch (UserNotLoggedException ex)
             {
                 return RedirectToAction("Logout", "Usuario");
             }
@@ -177,13 +181,14 @@ namespace Controllers
 
                 if (!result.IsSuccessStatusCode)
                 {
-                    ViewData["error"] = "Erro de conexão, Tente novamente mais tarde";
+                    ViewData["error"] = true;
+                    ViewData["errorMessage"] = "Erro ao lançar missão, Tente novamente mais tarde";
                     return RedirectToAction("Index", "Missao");
                 }
 
                 return await Index();
             }
-            catch (UsetNotLoggedException ex)
+            catch (UserNotLoggedException ex)
             {
                 return RedirectToAction("Logout", "Usuario");
             }

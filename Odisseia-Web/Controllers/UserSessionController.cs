@@ -30,7 +30,7 @@ namespace Controllers
         {
             if (GetUser(context) == null)
             {
-                throw new UsetNotLoggedException("_View_Usuario_Login");
+                throw new UserNotLoggedException("_View_Usuario_Login");
             }
         }
     }

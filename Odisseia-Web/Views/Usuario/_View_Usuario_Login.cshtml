@@ -87,7 +87,14 @@
                                     style="width: 100%; background-color: #213950; border: none;">
                                 Entrar
                             </button>
-                            <p style="color:red"> @ViewData["error"] </p>
+                            @try
+                            {
+                                if (bool.Parse(ViewData["error"].ToString()))
+                                {
+                                    <p style="color:red"> @ViewData["errorMessage"].ToString() </p>
+                                }
+                            }
+                            catch (Exception) { }
                         </form>
                     </div>
                     <div class="col-lg-4"></div>
