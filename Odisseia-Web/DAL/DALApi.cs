@@ -12,7 +12,7 @@ namespace OdisseiaWeb.DAL
         private static Dictionary<ApiCommands, string> _command = new Dictionary<ApiCommands, string>{
             { ApiCommands.CadastarMissao, "/api/Missao" },
             { ApiCommands.ListarMaterias, "/api/Materia" },
-            { ApiCommands.ListarCardMissao, "/api/Missao" },
+            { ApiCommands.ListarCardMissaoProfessor, "/api/Missao/Professor/" },
             { ApiCommands.LancarMissao, "/api/Missao/Lancar" },
             { ApiCommands.CardsMissaoAluno, "/api​/Missao​/Aluno​/" },
             { ApiCommands.InfoBasicaMissao, "/api/Missao/MissaoInfo/" },
@@ -22,7 +22,7 @@ namespace OdisseiaWeb.DAL
             { ApiCommands.AlterarUsuario, "/api/Usuario/" },
             { ApiCommands.DeletarUsuario, "/api/Usuario/" },
             { ApiCommands.LoginUsuario, "/api/Usuario/Login" },
-            { ApiCommands.RelatorioBasico, "api/Missao/RelatorioBasico" },
+            { ApiCommands.RelatorioBasico, "/api/Relatorio/RelatorioBasico" },
             { ApiCommands.CriarUsuario, "/api/Usuario" },
             { ApiCommands.LoginProfessor, "/api/Professor/Login" },
             { ApiCommands.ListarTags, "/api/Tag" }

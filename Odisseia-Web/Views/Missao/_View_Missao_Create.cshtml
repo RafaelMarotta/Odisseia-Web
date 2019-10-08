@@ -51,16 +51,29 @@
             <div id="frmQuestao_Id_" class="container">
 
                 <div class="form-group">
-
                     <label for="_Id_QuestaoDificuldade" class="control-label">Dificuldade:</label>
                     <input type="range" name="_Id_QuestaoDificuldade" class="form-control" min="0" max="5" />
                 </div>
+
+                <div class="card">
+                    <ul class="list-group list-group-flush" >
+                        <li class="list-group-item"><input type="text" class="form-control" onfocusout="cleanTags(_Id_)" onfocus="listTags(_Id_)" onkeyup="listTags(_Id_)" id="_Id_TagComboBox"/></li>
+                        <span id="_Id_TagComboBoxList" style="position: absolute">
+                        </span>
+                    </ul>
+                </div>
+
+                <div id="_Id_Tags">
+
+                </div>
+
                 <div class="form-group">
 
                     <label for="_Id_QuestaoEnunciado" class="control-label">Enunciado:</label>
                     <textarea name="_Id_QuestaoEnunciado" class="form-control" rows="5" style="resize: none;" required>
                         </textarea>
                 </div>
+
                 <div class="form-group">
 
                     <label class="control-label">Alternativas</label><br>
@@ -82,6 +95,14 @@
         <td><input type="text" class="form-control" name="_Id_Questao_Id1_AlternativaTexto" required></td>
     </tr>
 </table>
+
+<ul hidden id="TagCard">
+    <li class="list-group-item cursor-h" onclick="selectTag(_Id_,_Id1_)">_Name_</li>
+</ul>
+
+<label hidden id="TagBoxCard">
+    _Name_
+</label>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

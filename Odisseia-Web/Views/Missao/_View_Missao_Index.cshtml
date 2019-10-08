@@ -15,18 +15,16 @@ catch (Exception) { }
             <th scope="col">Título</th>
             <th scope="col">Descrição</th>
             <th scope="col">Prazo</th>
-            <th scope="col">Novo Prazo</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (Models.Missao.MissaoListarDTO missao in Model)
+        @foreach (Models.Missao.MissaoListarDTO missao in Model.Where(m => !m.lancada))
         {
             <form asp-action="Lancar" asp-controller="Missao">
                 <tr>
                     <input type="hidden" id="MissaoId" name="MissaoId" value="@missao.id" />
                     <td>@missao.titulo</td>
                     <td>@($"{missao.descricao.Substring(0, (missao.descricao.Length >= 25) ? 25 : missao.descricao.Length)}...")</td>
-                    <td>@missao.dataPrazo.ToString("dd/MM/yyyy hh:mm")</td>
                     <td>
                         <input name="MissaoPrazo" type="datetime-local" min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-ddThh:mm:ss")" class="form-control" required />
                     </td>

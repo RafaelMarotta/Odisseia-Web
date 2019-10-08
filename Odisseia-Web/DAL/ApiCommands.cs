@@ -14,7 +14,7 @@
         DeletarUsuario,
         LoginUsuario,
         CriarUsuario,
-        ListarCardMissao,
+        ListarCardMissaoProfessor,
         RelatorioBasico,
         NotImplementedCommand,
         LoginProfessor,

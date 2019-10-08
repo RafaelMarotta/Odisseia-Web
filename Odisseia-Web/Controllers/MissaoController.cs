@@ -27,7 +27,7 @@ namespace Controllers
             {
                 UserSessionController.ValidateUser(HttpContext);
 
-                HttpResponseMessage result = await DALApi.GET(ApiCommands.ListarCardMissao);
+                HttpResponseMessage result = await DALApi.GET(ApiCommands.ListarCardMissaoProfessor, UserSessionController.GetUser(HttpContext).id);
 
                 if (!result.IsSuccessStatusCode)
                 {

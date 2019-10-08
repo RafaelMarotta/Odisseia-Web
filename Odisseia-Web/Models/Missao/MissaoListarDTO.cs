@@ -9,5 +9,6 @@ namespace Models.Missao
         public string titulo { get; set; }
         public string descricao { get; set; }
         public DateTime dataPrazo { get; set; }
+        public bool lancada { get; set; }
     }
 }
