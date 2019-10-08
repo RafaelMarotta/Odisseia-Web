@@ -33,10 +33,12 @@ function checkIt(idA, idQ) {
 }
 
 function listTags(id) {
+    hideTags(id);
     var input = document.getElementById(id + "TagComboBox");
 
-    if ((input.value.length % 3 === 0 && input.value.length > 0) || input.value.length > 0) {
-        cleanTags(id);
+    if ((input.value.length % 3 === 0 && input.value.length > 0) || input.value.length == 1) {
+
+        tagArray = [];
         //Comando na API
         tagArray.push('{"id": 1,"name": "A"}');
         tagArray.push('{"id": 2,"name": "C"}');
@@ -46,8 +48,9 @@ function listTags(id) {
     }
 
     var result = "";
-    var list = document.getElementById("TagCard").innerHTML;;
+    var list = document.getElementById("TagCard").innerHTML;
 
+    document.getElementById(id + "TagComboBoxList").innerHTML = "";
     if (tagArray.length > 0) {
         for (i = 0; i < tagArray.length; i++) {
             var obj = JSON.parse(tagArray[i]);
@@ -56,25 +59,30 @@ function listTags(id) {
             row = row.replace(/_Id1_/g, idQ);
             row = row.replace(/_Id_/g, obj.id);
             row = row.replace(/_Name_/g, obj.name);
-
             result += row;
-        }  
+        }
+
+        document.getElementById(id + "TagComboBoxList").insertAdjacentHTML("beforeend", result);
+        showTags(id);
     }
-
-    document.getElementById(id + "TagComboBoxList").innerHTML = "";
-    document.getElementById(id + "TagComboBoxList").insertAdjacentHTML("beforeend", result);
 }
 
-function cleanTags(id) {
+function hideTags(id) {
+    $("#" + id + "TagComboBoxList").slideUp(300);
     document.getElementById(id + "TagComboBoxList").innerHTML = "";
-    tagArray = [];
 }
+
+function showTags(id) {
+    $("#" + id + "TagComboBoxList").slideDown(300);
+}
+
+
 
 function selectTag(id, idQ) {
     for (i = 0; i < tagArray.length; i++) {
         if (tagArray[i].id == id) {
             document.getElementById(idQ + "Tags").insertAdjacentHTML("beforeend", tagArray[i].name);
         }
-    } 
-    cleanTags(idQ);
+    }
+    hideTags(idQ);
 }
