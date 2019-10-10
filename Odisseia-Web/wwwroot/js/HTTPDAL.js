@@ -1,6 +1,4 @@
-﻿
-
-function Request(type, url) {
+﻿function Request(type, url) {
 
     var httpRequest;
 

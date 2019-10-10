@@ -57,7 +57,7 @@
 
                 <div class="card">
                     <ul class="list-group list-group-flush" >
-                        <li class="list-group-item"><input type="text" class="form-control" onfocusout="cleanTags(_Id_)" onfocus="listTags(_Id_)" onkeyup="listTags(_Id_)" id="_Id_TagComboBox"/></li>
+                        <li class="list-group-item"><input type="text" class="form-control" onfocusout="cleanTags(_Id_)" onfocus="searchTags(_Id_)" onkeyup="searchTags(_Id_)" id="_Id_TagComboBox"/></li>
                         <span id="_Id_TagComboBoxList" style="position: absolute">
                         </span>
                     </ul>
@@ -91,7 +91,7 @@
 <table hidden id="AlternativaCard">
     <tr>
         <input type="hidden" name="_Id_Questao_Id1_AlternativaCorreto" id="_Id_Questao_Id1_AlternativaCorreto" value="false">
-        <td><input style="width: 5vh;" type="checkbox" class="form-control" onclick="checkIt(_Id_,_Id1_)"></td>
+        <td><input style="width: 5vh;" type="checkbox" class="form-control" onclick="alternativaCheckIt(_Id_,_Id1_)"></td>
         <td><input type="text" class="form-control" name="_Id_Questao_Id1_AlternativaTexto" required></td>
     </tr>
 </table>
