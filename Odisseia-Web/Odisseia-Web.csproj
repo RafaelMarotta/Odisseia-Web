@@ -11,11 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\" />
-    <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="Views\Relatorio\_View_Relatorio_Turma.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

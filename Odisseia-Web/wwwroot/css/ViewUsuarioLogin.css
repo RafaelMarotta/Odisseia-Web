@@ -1,0 +1,46 @@
+﻿body {
+    background-image: url("../images/background3.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.navbar {
+    background-color: transparent;
+}
+
+nav ul li a {
+    font-size: 20px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    color: #FFFFFF;
+}
+
+.arrow-back {
+    max-width: 15px;
+    margin-right: 10px;
+}
+
+.inputCustom {
+    background-color: transparent;
+    border-bottom-color: #FFFFFF;
+    border-top: none;
+    border-left: none;
+    border-right: none
+}
+
+.card {
+    background-color: rgba(22, 38, 53, 0.8);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    width: 400px;
+    margin: 0 auto 0 auto;
+}
+
+.card .card-body {
+    display: table;
+    width: 100%;
+    padding: 12px;
+}

@@ -8,24 +8,61 @@
 
     <environment include="Development,Production">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
+        <!-- CSS-->
         <link rel="stylesheet" href="~/css/general.css" />
         <link rel="stylesheet" href="~/css/sideBar.css" />
         <link rel="stylesheet" href="~/css/styleExtra.css" />
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet">
     </environment>
+
+    @*<script>
+            function myFunction() {
+                var x = document.getElementById("sidebar");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+        </script>*@
 
 </head>
 <body>
 
-    <div class="sidebar">
-        <center><img src="~/images/Logo_Reduzida_Preta.png" class="img-fluid" style="max-width: 100px"></center>
-        @Html.ActionLink("HOME", "Index", "Missao")
-        @Html.ActionLink("MISSÃO", "Create", "Missao")
-        @Html.ActionLink("RELATÓRIO", "Index", "Relatorio")
-        @Html.ActionLink("LOGOUT", "Logout", "Usuario")
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <img src="~/images/Logo_Reduzida_Branca.png" class="img-fluid" />
+        </div>
+        <div class="sidebar-content">
+            <div>
+                <img src="~/images/icon_relatorio_white.png" class="img-fluid sidebar-icons" />
+                @Html.ActionLink("HOME", "Index", "Missao")
+            </div>
+            <div>
+                <img src="~/images/icon_missoes_white.png" class="img-fluid sidebar-icons" />
+                @Html.ActionLink("MISSÃO", "Create", "Missao")
+            </div>
+            <div>
+                <img src="~/images/icon_relatorio_white.png" class="img-fluid sidebar-icons" />
+                @Html.ActionLink("RELATÓRIO", "Index", "Relatorio")
+            </div>
+            <div>
+                <img src="~/images/icon_logout_white.png" class="img-fluid sidebar-icons" />
+                @Html.ActionLink("LOGOUT", "Logout", "Usuario")
+            </div>
+        </div>
     </div>
 
-    <div class="container body-content">
-        <div style="margin-left: 6vw; margin-top: 1vw; overflow-x: hidden;">@RenderBody()</div>
+    <div class="content-container">
+        <div class="container-fluid">
+            @*<div class="row bar-responsive text-center">
+                    <button onclick="myFunction()">Click Me</button>
+                </div>*@
+            @RenderBody()
+        </div>
     </div>
 
     <environment include="Development,Production">
@@ -34,6 +71,7 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+
 
 </body>
 </html>

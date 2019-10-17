@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\felipe.tertuliano\\Desktop\\Odisseia-Web\\Odisseia-Web\\Odisseia-Web.csproj": {}
+    "C:\\Users\\pimen\\Documents\\Odisseia-Web\\Odisseia-Web\\Odisseia-Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\felipe.tertuliano\\Desktop\\Odisseia-Web\\Odisseia-Web\\Odisseia-Web.csproj": {
+    "C:\\Users\\pimen\\Documents\\Odisseia-Web\\Odisseia-Web\\Odisseia-Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\felipe.tertuliano\\Desktop\\Odisseia-Web\\Odisseia-Web\\Odisseia-Web.csproj",
+        "projectUniqueName": "C:\\Users\\pimen\\Documents\\Odisseia-Web\\Odisseia-Web\\Odisseia-Web.csproj",
         "projectName": "Odisseia-Web",
-        "projectPath": "C:\\Users\\felipe.tertuliano\\Desktop\\Odisseia-Web\\Odisseia-Web\\Odisseia-Web.csproj",
-        "packagesPath": "C:\\Users\\felipe.tertuliano\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\felipe.tertuliano\\Desktop\\Odisseia-Web\\Odisseia-Web\\obj\\",
+        "projectPath": "C:\\Users\\pimen\\Documents\\Odisseia-Web\\Odisseia-Web\\Odisseia-Web.csproj",
+        "packagesPath": "C:\\Users\\pimen\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\pimen\\Documents\\Odisseia-Web\\Odisseia-Web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\felipe.tertuliano\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\pimen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -53,7 +53,6 @@
               "version": "[2.1.2, )"
             },
             "Microsoft.NETCore.App": {
-              "suppressParent": "All",
               "target": "Package",
               "version": "[2.1.0, )",
               "autoReferenced": true

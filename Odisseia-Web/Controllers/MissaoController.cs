@@ -85,7 +85,7 @@ namespace Controllers
         
         /* 
          Rules for Create:
-            -> The name of the inputs:
+            -> The name of the inputs: 
                 "{ value1 }{ value2 { value2.1 } }{ value3 }{ value4 }"
                 * value1 = The Id auto-generated of the input class;
                 * value2 (Optional) = The class who the input class belongs;
