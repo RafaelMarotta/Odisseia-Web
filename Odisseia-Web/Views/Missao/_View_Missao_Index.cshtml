@@ -9,31 +9,49 @@
 }
 catch (Exception) { }
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Título</th>
-            <th scope="col">Descrição</th>
-            <th scope="col">Prazo</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Models.Missao.MissaoListarDTO missao in Model.Where(m => !m.lancada))
-        {
-            <form asp-action="Lancar" asp-controller="Missao">
-                <tr>
-                    <input type="hidden" id="MissaoId" name="MissaoId" value="@missao.id" />
-                    <td>@missao.titulo</td>
-                    <td>@($"{missao.descricao.Substring(0, (missao.descricao.Length >= 25) ? 25 : missao.descricao.Length)}...")</td>
-                    <td>
-                        <input name="MissaoPrazo" type="datetime-local" min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-ddThh:mm:ss")" class="form-control" required />
-                    </td>
-                    <td><button type="submit" class="btn btn-primary lancarmissaoid">Lançar</button></td>
-                </tr>
-            </form>
-        }
-    </tbody>
-</table>
+<link rel="stylesheet" href="~/css/ViewMissaoIndex.css" />
+
+<div class="row">
+    <div class="col">
+        <h4 class="mb-20"><u>LANÇAR MISSÃO</u></h4>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">TÍTULO</th>
+                                <th scope="col">DESCRIÇÃO</th>
+                                <th scope="col">TAGS</th>
+                                <th scope="col">PRAZO</th>
+                                <th scope="col">NOVO PRAZO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Models.Missao.MissaoListarDTO missao in Model.Where(m => !m.lancada))
+                            {
+                                <form asp-action="Lancar" asp-controller="Missao">
+                                    <tr>
+                                        <input type="hidden" id="MissaoId" name="MissaoId" value="@missao.id" />
+                                        <td>@missao.titulo</td>
+                                        <td>@($"{missao.descricao.Substring(0, (missao.descricao.Length >= 25) ? 25 : missao.descricao.Length)}...")</td>
+                                        <td>*Imprimir tags*</td> @*Depois de cada tag, colocar um <br> para a quebra de linha*@
+                                        <td>*Imprimir prazo*</td>
+                                        <td>
+                                            <input name="MissaoPrazo" type="datetime-local" min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-ddThh:mm:ss")" class="form-control" required />
+                                        </td>
+                                        <td><button type="submit" class="btn lancarmissaoid laranja_back white">LANÇAR</button></td>
+                                    </tr>
+                                </form>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

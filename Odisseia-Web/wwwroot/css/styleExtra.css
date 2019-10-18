@@ -2,6 +2,14 @@
     color: #FFFFFF;
 }
 
+.laranja {
+    color: #F3663B;
+}
+
+.laranja_back {
+    background-color: #F3663B;
+}
+
 .cinza_secundary {
     color: rgb(194, 194, 194);
 }
@@ -169,26 +177,6 @@
         font-size: 18px;
     }
 
-
-/*Relatorio Card*/
-.card {
-    padding: 15px;
-    background-color: #fafafa;
-    border-left: 6px solid;
-    margin-bottom: 10px;
-    width: 60%;
-    -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
-    box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
-}
-
-.card-success {
-    border-color: #80D651;
-}
-
-.card-danger {
-    border-color: #d73814;
-}
 
 
 

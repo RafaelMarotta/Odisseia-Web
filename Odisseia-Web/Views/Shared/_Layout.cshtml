@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="~/css/styleExtra.css" />
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300&display=swap" rel="stylesheet">
     </environment>
 
     @*<script>
@@ -38,26 +38,34 @@
         </div>
         <div class="sidebar-content">
             <div>
-                <img src="~/images/icon_relatorio_white.png" class="img-fluid sidebar-icons" />
-                @Html.ActionLink("HOME", "Index", "Missao")
+                <a asp-action="Index" asp-controller="Missao">
+                    <img src="~/images/icon_relatorio_white.png" class="img-fluid sidebar-icons" />
+                    HOME
+                </a>
             </div>
             <div>
-                <img src="~/images/icon_missoes_white.png" class="img-fluid sidebar-icons" />
-                @Html.ActionLink("MISSÃO", "Create", "Missao")
+                <a asp-action="Create" asp-controller="Missao">
+                    <img src="~/images/icon_missoes_white.png" class="img-fluid sidebar-icons" />
+                    MISSÃO
+                </a>
             </div>
             <div>
-                <img src="~/images/icon_relatorio_white.png" class="img-fluid sidebar-icons" />
-                @Html.ActionLink("RELATÓRIO", "Index", "Relatorio")
+                <a asp-action="Index" asp-controller="Relatorio">
+                    <img src="~/images/icon_relatorio_white.png" class="img-fluid sidebar-icons" />
+                    RELATÓRIO
+                </a>
             </div>
             <div>
-                <img src="~/images/icon_logout_white.png" class="img-fluid sidebar-icons" />
-                @Html.ActionLink("LOGOUT", "Logout", "Usuario")
+                <a asp-action="Logout" asp-controller="Usuario">
+                    <img src="~/images/icon_logout_white.png" class="img-fluid sidebar-icons" />
+                    LOGOUT
+                </a>
             </div>
         </div>
     </div>
 
     <div class="content-container">
-        <div class="container-fluid">
+        <div class="container-fluid mb-20">
             @*<div class="row bar-responsive text-center">
                     <button onclick="myFunction()">Click Me</button>
                 </div>*@

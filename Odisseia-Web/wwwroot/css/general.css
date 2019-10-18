@@ -1,3 +1,20 @@
-﻿label, input, button, a, p, h1, h2, h3, h4, h5, h6{
+﻿body {
+    background-color: #F5F5F5;
+}
+
+.content-container {
+    padding-top: 20px;
+    padding-left: 130px;
+}
+
+label, input, button, a, p, h1, h2, h3, h4, h5, h6, th, td, input {
     font-family: 'Titillium Web', sans-serif;
+    color: #828282;
+}
+
+.card {
+    border-radius: 15px;
+    -webkit-box-shadow: 0px 3px 5px 0px rgba(210,210,210,1);
+    -moz-box-shadow: 0px 3px 5px 0px rgba(210,210,210,1);
+    box-shadow: 0px 3px 5px 0px rgba(210,210,210,1);
 }
