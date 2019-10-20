@@ -55,8 +55,7 @@ namespace Odisseia_Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
-            app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();

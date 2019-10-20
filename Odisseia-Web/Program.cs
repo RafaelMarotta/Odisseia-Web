@@ -12,13 +12,12 @@ namespace Odisseia_Web
 {
     public class Program
     {
-        public static void Main(string[] args)
-        {
-            CreateWebHostBuilder(args).Build().Run();
-        }
+        public static void Main(string[] args) => CreateWebHostBuilder(args).Run();
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        public static IWebHost CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseKestrel()
+                .UseStartup<Startup>()
+            .Build();
     }
 }

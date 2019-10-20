@@ -175,7 +175,7 @@ namespace Controllers
 
                 MissaoLancarDTO missao = new MissaoLancarDTO
                 {
-                    DataPrazo = DateTime.ParseExact(collection["MissaoPrazo"], "yyyy-MM-ddThh:mm", CultureInfo.InvariantCulture).Ticks,
+                    DataPrazo = DateTime.Parse(collection["MissaoPrazo"].ToString()).Ticks,
                     MissaoId = int.Parse(collection["MissaoId"])
                 };
 
