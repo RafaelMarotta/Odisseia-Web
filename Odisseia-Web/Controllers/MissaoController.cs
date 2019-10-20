@@ -15,6 +15,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Controllers.Exceptions;
 using Models.Materia;
+using Models.Tag;
 using System.Globalization;
 
 namespace Controllers
@@ -42,7 +43,7 @@ namespace Controllers
 
                 return View("_View_Missao_Index", missoes);
             }
-            catch (UserNotLoggedException ex)
+            catch (UserNotLoggedException)
             {
                 return RedirectToAction("Logout", "Usuario");
             }
@@ -77,7 +78,7 @@ namespace Controllers
 
                 return View("_View_Missao_Create", materias);
             }
-            catch (UserNotLoggedException ex)
+            catch (UserNotLoggedException)
             {
                 return RedirectToAction("Logout", "Usuario");
             }
@@ -134,7 +135,8 @@ namespace Controllers
                             }
                         }
 
-                        questoesList.Add(new QuestaoCreateDTO { alternativas = alternativasList, dificuldade = int.Parse(qstD.Value), enunciado = qstE.Value });
+                        List<TagCreateDTO> tagList = new List<TagCreateDTO>();
+                        questoesList.Add(new QuestaoCreateDTO { alternativas = alternativasList, dificuldade = int.Parse(qstD.Value), enunciado = qstE.Value , tags = tagList});
                     }
                 }
 
@@ -158,7 +160,7 @@ namespace Controllers
 
                 return await Index();
             }
-            catch (UserNotLoggedException ex)
+            catch (UserNotLoggedException)
             {
                 return RedirectToAction("Logout", "Usuario");
             }
@@ -188,7 +190,7 @@ namespace Controllers
 
                 return await Index();
             }
-            catch (UserNotLoggedException ex)
+            catch (UserNotLoggedException)
             {
                 return RedirectToAction("Logout", "Usuario");
             }

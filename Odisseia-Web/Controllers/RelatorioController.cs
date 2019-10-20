@@ -32,7 +32,7 @@ namespace Controllers
 
                 return View("_View_Relatorio_Turma", relatorio);
             }
-            catch (UserNotLoggedException ex)
+            catch (UserNotLoggedException)
             {
                 return RedirectToAction("Logout", "Usuario");
             }

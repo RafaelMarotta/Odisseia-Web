@@ -192,3 +192,6 @@ C:\Users\felipe.tertuliano\Desktop\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreap
 C:\Users\felipe.tertuliano\Desktop\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Odisseia-Web.csproj.CopyComplete
 C:\Users\pimen\Documents\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Razor\Views\Missao\_View_Missao_Index.g.cshtml.cs
 C:\Users\pimen\Documents\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Razor\Views\Relatorio\_View_Relatorio_Turma.g.cshtml.cs
+C:\Users\marotta\Desktop\Odisseia\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Razor\Views\Missao\_View_Missao_Index.g.cshtml.cs
+C:\Users\marotta\Desktop\Odisseia\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Razor\Views\Relatorio\_View_Relatorio_Tag.g.cshtml.cs
+C:\Users\marotta\Desktop\Odisseia\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Razor\Views\Relatorio\_View_Relatorio_Turma.g.cshtml.cs

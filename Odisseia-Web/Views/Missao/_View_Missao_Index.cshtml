@@ -36,8 +36,7 @@ catch (Exception) { }
                                         <input type="hidden" id="MissaoId" name="MissaoId" value="@missao.id" />
                                         <td>@missao.titulo</td>
                                         <td>@($"{missao.descricao.Substring(0, (missao.descricao.Length >= 25) ? 25 : missao.descricao.Length)}...")</td>
-                                        <td>*Imprimir tags*</td> @*Depois de cada tag, colocar um <br> para a quebra de linha*@
-                                        <td>*Imprimir prazo*</td>
+                                        <td>@($"{missao.dataPrazo}")</td>
                                         <td>
                                             <input name="MissaoPrazo" type="datetime-local" min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-ddThh:mm:ss")" class="form-control" required />
                                         </td>
