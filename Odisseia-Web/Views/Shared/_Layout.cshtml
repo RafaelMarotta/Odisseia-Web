@@ -8,8 +8,9 @@
 
     <environment include="Development,Production">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
-        <!-- CSS-->
+        <!-- CSS -->
         <link rel="stylesheet" href="~/css/general.css" />
         <link rel="stylesheet" href="~/css/sideBar.css" />
         <link rel="stylesheet" href="~/css/styleExtra.css" />
@@ -18,16 +19,17 @@
         <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300&display=swap" rel="stylesheet">
     </environment>
 
-    @*<script>
-            function myFunction() {
-                var x = document.getElementById("sidebar");
-                if (x.style.display === "none") {
-                    x.style.display = "block";
-                } else {
-                    x.style.display = "none";
-                }
+    <script>
+        function Dropdown() {
+            var x = document.getElementById("dropdown-content");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
             }
-        </script>*@
+        }
+    </script>
+
 
 </head>
 <body>
@@ -44,10 +46,14 @@
                 </a>
             </div>
             <div>
-                <a asp-action="Create" asp-controller="Missao">
+                <a onclick="Dropdown()">
                     <img src="~/images/icon_missoes_white.png" class="img-fluid sidebar-icons" />
                     MISSÃO
                 </a>
+            </div>
+            <div class="dropdown-content" id="dropdown-content">
+                <a asp-action="Create" asp-controller="Missao">Cadastro Missão</a>
+                <a asp-action="" asp-controller="">Lançar Missão</a>
             </div>
             <div>
                 <a asp-action="Index" asp-controller="Relatorio">
@@ -66,9 +72,6 @@
 
     <div class="content-container">
         <div class="container-fluid mb-20">
-            @*<div class="row bar-responsive text-center">
-                    <button onclick="myFunction()">Click Me</button>
-                </div>*@
             @RenderBody()
         </div>
     </div>

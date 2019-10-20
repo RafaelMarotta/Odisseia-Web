@@ -3,7 +3,6 @@
     width: 130px;
     height: 100%;
     left: 0;
-    overflow-x: hidden;
     overflow-y: auto;
     background: #F3663B;
     color: #fff;
@@ -57,4 +56,17 @@
     .bar-responsive {
         display: none;
     }
+}
+
+.dropdown-content{
+    display: none;
+    background-color: transparent;
+    width: auto;
+    height: auto;
+    margin-top: -10px;
+}
+
+.dropdown-content a{
+    margin-bottom: 3px;
+    padding: 5px;
 }
