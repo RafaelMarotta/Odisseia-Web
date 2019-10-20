@@ -57,7 +57,7 @@ namespace Controllers
 
             UserSessionController.SetUser(HttpContext, usuario);
 
-            return RedirectToAction("Index", "Missao");
+            return RedirectToAction("Index", "Relatorio");
         }
 
         [HttpGet]
