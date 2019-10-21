@@ -7,6 +7,7 @@
   <ItemGroup>
     <Content Remove="wwwroot\js\FormController.js" />
     <Content Remove="wwwroot\js\JavaScript.js" />
+    <Content Remove="wwwroot\js\ViewMissaoCreateControllers\CardQuestao.js" />
   </ItemGroup>
 
   <ItemGroup>

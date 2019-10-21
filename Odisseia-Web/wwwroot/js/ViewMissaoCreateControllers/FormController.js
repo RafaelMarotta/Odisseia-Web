@@ -46,5 +46,3 @@ function addTag() {
     document.getElementById("tblQuestao" + $("#TagQuestaoId").val() + "Tag").insertAdjacentHTML("beforeend", result);
     idT++;
 }
-
-

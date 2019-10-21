@@ -2,6 +2,8 @@
 
 <script type="text/javascript" src="~/js/ViewMissaoCreateControllers/FormController.js"></script>
 <script type="text/javascript" src="~/js/ViewMissaoCreateControllers/TagComboBoxController.js"></script>
+<script type="text/javascript" src="~/js/ViewMissaoCreateControllers/CardQuestao.js"></script>
+<link rel="stylesheet" href="~/css/ViewMissaoCreate.css" />
 
 <style>
     .cursor-h:hover {
@@ -9,26 +11,25 @@
     }
 </style>
 
-<link rel="stylesheet" href="~/css/ViewMissaoCreate.css" />
+<div class="row">
+    <div class="col-md">
+        <h4 class="mb-20"><u>CRIAR MISSÃO</u></h4>
+    </div>
+</div>
 
-<h2>Cadastro Missao</h2>
-<hr />
-
-
-
-<div class="row container">
+<div class="row">
     <div class="col-md-4">
         <form asp-action="Create" asp-controller="Missao">
             <div class="form-group">
-                <label for="MissaoTitulo" class="control-label">Título:</label>
+                <label for="MissaoTitulo" class="control-label">TÍTULO:</label>
                 <input name="MissaoTitulo" class="form-control" required />
             </div>
             <div class="form-group">
-                <label for="MissaoDescricao" class="control-label">Descrição:</label>
+                <label for="MissaoDescricao" class="control-label">DESCRIÇÃO:</label>
                 <input name="MissaoDescricao" class="form-control" required />
             </div>
             <div class="form-group">
-                <label for="MissaoMateria" class="control-label">Matéria:</label>
+                <label for="MissaoMateria" class="control-label">MATÉRIA:</label>
                 <select name="MissaoMateria" class="form-control" required>
                     @foreach (Models.Materia.MateriaListarDTO materia in Model)
                     {
@@ -36,98 +37,116 @@
                     }
                 </select>
             </div>
-            <div>
-                <label class="control-label">Questões</label><br>
-                <label id="btnAddQuestao" class="cursor-h btn btn-info" onclick="addQuestao()">Add Questão</label>
-                <table class="table table-hover">
-                    <tbody id="tblQuestoes"></tbody>
-                </table>
+            <div class="form-group">
+                <label class="control-label">QUESTÕES:</label><br>
+                <label id="btnAddQuestao" class="cursor-h btn laranja_back white" onclick="addQuestao()" style="width:50%;">ADICIONAR QUESTAO</label>
+                @*<table class="table table-hover">
+                        <tbody id="tblQuestoes"></tbody>
+                    </table>*@
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-success" />
+                <label class="control-label">FINALIZAR</label><br />
+                <input type="submit" value="CRIAR MISSÃO" class="btn laranja_back white" style="width:100%;" />
             </div>
         </form>
     </div>
-</div>
-
-<!-- Tag Modal -->
-<div class="modal fade" id="TagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Adicionar Tag</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <input id="TagQuestaoId" type="number" hidden required />
-
-                <div class="form-group">
-                    <label for="TagNome" class="control-label">Nome:</label>
-                    <input type="text" id="TagNome" class="form-control" required />
-                </div>
-
-                <div class="form-group">
-                    <label for="TagColor" class="control-label">Cor da Tag:</label>
-                    <input class="form-control" type="color" id="TagColor" required />
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addTag()">Adicionar</button>
-            </div>
-        </div>
+    <div class="col-md-8">
+        <!-- Card Questão -->
+        <table class="table table-borderless">
+            <tbody id="tblQuestoes"></tbody>
+        </table>
     </div>
 </div>
 
 <table hidden id="QuestaoCard">
     <tr>
         <td>
-            <label class="cursor-h" id="toggleQuestao_Id_" onclick="toggleId(frmQuestao_Id_)">Questão_Id_</label>
-            <div id="frmQuestao_Id_" class="container">
-
-                <div class="form-group">
-                    <label for="_Id_QuestaoDificuldade" class="control-label">Dificuldade:</label>
-                    <input type="range" name="_Id_QuestaoDificuldade" class="form-control" min="0" max="5" />
-                </div>
-
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#TagModal" onclick="setTag(_Id_)">
-                    Add Tag
-                </button>
-
-                <div class="card" id="tblQuestao_Id_Tag">
-
-                </div>
-
-                <div class="form-group">
-
-                    <label for="_Id_QuestaoEnunciado" class="control-label">Enunciado:</label>
-                    <textarea name="_Id_QuestaoEnunciado" class="form-control" rows="5" style="resize: none;" required>
-                        </textarea>
-                </div>
-
-                <div class="form-group">
-
-                    <label class="control-label">Alternativas</label><br>
-                    <label class="btn btn-info cursor-h" onclick="addAlternativa(_Id_)">Add Alternativa</label>
-                    <table class="table table-hover">
-
-                        <tbody id="tblQuestao_Id_Alternativa"></tbody>
-                    </table>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md">
+                            <label id="toggleQuestao_Id_" onclick="toggleId(frmQuestao_Id_)" style="text-align:left;"><u>QUESTÃO _Id_</u></label>
+                            <img src="~/images/icon_maximize.png" data-toggle="collapse" data-target="#contentCard_Id_" style="float: right;" />
+                        </div>
+                    </div>
+                    <div class="row collapse text-left" id="contentCard_Id_">
+                        <div class="col-md-8">
+                            <!--Enunciado-->
+                            <div class="form-group">
+                                <label for="_Id_QuestaoEnunciado" class="control-label">ENUNCIADO:</label>
+                                <textarea name="_Id_QuestaoEnunciado" class="form-control" rows="3" style="resize: none;" required></textarea>
+                            </div>
+                            <!--Alternativas-->
+                            <div class="form-group">
+                                @*<label class="control-label">ALTERNATIVAS:</label><br>*@
+                                <label class="btn laranja_back white cursor-h" onclick="addAlternativa(_Id_)">ADICIONAR ALTERNATIVA</label>
+                                <table class="table table-borderless">
+                                    <tbody id="tblQuestao_Id_Alternativa"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <!--Dificuldade-->
+                            <div class="form-group">
+                                <label for="_Id_QuestaoDificuldade" class="control-label">DIFICULDADE:</label>
+                                <select class="form-control" name="_Id_QuestaoDificuldade">
+                                    <option value="1">FÁCIL</option>
+                                    <option value="2">MÉDIO</option>
+                                    <option value="3">DIFÍCIO</option>
+                                </select>
+                                @*<input type="range" name="_Id_QuestaoDificuldade" class="form-control" min="0" max="5" />*@
+                            </div>
+                            <!--Tags-->
+                            <button type="button" class="btn laranja_back white" data-toggle="modal" data-target="#TagModal" onclick="setTag(_Id_)">
+                                ADICIONAR TAG
+                            </button>
+                            <div class="row">
+                                <div class="col" id="tblQuestao_Id_Tag"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </td>
     </tr>
 </table>
 
+<!-- Tag Modal -->
+<div class="modal fade" id="TagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <input id="TagQuestaoId" type="number" hidden required />
+                <div class="form-group">
+                    <label for="TagNome" class="control-label">NOME:</label>
+                    <input type="text" id="TagNome" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="TagColor" class="control-label">COR DA TAG:</label>
+                    <input class="form-control" type="color" id="TagColor" required />
+                </div>
+                <div class="form-group text-right" style="margin: 0;">
+                    <button type="button" class="btn cinza_back white" data-dismiss="modal">FECHAR</button>
+                    <button type="button" class="btn laranja_back white" data-dismiss="modal" onclick="addTag()">ADICIONAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <table hidden id="AlternativaCard">
     <tr>
-        <input type="hidden" name="_Id_Questao_Id1_AlternativaCorreto" id="_Id_Questao_Id1_AlternativaCorreto" value="false">
-        <td><input style="width: 5vh;" type="checkbox" class="form-control" onclick="alternativaCheckIt(_Id_,_Id1_)"></td>
-        <td><input type="text" class="form-control" name="_Id_Questao_Id1_AlternativaTexto" required></td>
+        <td>
+            <div class="row">
+                <input type="hidden" name="_Id_Questao_Id1_AlternativaCorreto" id="_Id_Questao_Id1_AlternativaCorreto" value="false">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <input style="width: 7vh; margin-right:3px;" type="checkbox" class="form-control" onclick="alternativaCheckIt(_Id_,_Id1_)">
+                    </div>
+                    <input type="text" class="form-control" name="_Id_Questao_Id1_AlternativaTexto" required>
+                </div>
+            </div>
+        </td>
     </tr>
 </table>
 
@@ -135,10 +154,9 @@
     <li class="list-group-item cursor-h" onclick="selectTag(_Id_,_Id1_)">_Name_</li>
 </ul>
 
-<label hidden id="TagBoxCard">
-    <div class="card" >
+<div hidden id="TagBoxCard">
+    <div class="card">
         <ul class="list-group list-group-flush" id="_Id_Questao_Id1_TagBoxCard">
-
             <li class="list-group-item" style="background-color:_Color_;">
                 <label style="color: white;">_Name_</label>
                 <button type="button" class="close" aria-label="Uncheck" onclick="">
@@ -150,12 +168,10 @@
                     <input type="text" value="_Color_" name="_Id_Questao_Id1_TagColor" />
                 </div>
             </li>
-
             <input type="checkbox" id="_Id_Questao_Id1_Tag" hidden checked>
-
         </ul>
     </div>
-</label>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

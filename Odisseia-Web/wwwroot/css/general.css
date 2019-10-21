@@ -13,7 +13,7 @@ label, input, button, a, p, h1, h2, h3, h4, h5, h6, th, td, input {
 }
 
 .card {
-    border-radius: 15px;
+    border-radius: 10px;
     -webkit-box-shadow: 0px 3px 5px 0px rgba(210,210,210,1);
     -moz-box-shadow: 0px 3px 5px 0px rgba(210,210,210,1);
     box-shadow: 0px 3px 5px 0px rgba(210,210,210,1);
