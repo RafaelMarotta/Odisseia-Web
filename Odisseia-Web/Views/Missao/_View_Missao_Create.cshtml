@@ -50,6 +50,39 @@
     </div>
 </div>
 
+<!-- Tag Modal -->
+<div class="modal fade" id="TagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Adicionar Tag</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <input id="TagQuestaoId" type="number" hidden required />
+
+                <div class="form-group">
+                    <label for="TagNome" class="control-label">Nome:</label>
+                    <input type="text" id="TagNome" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="TagColor" class="control-label">Cor da Tag:</label>
+                    <input class="form-control" type="color" id="TagColor" required />
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addTag()">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <table hidden id="QuestaoCard">
     <tr>
         <td>
@@ -61,15 +94,11 @@
                     <input type="range" name="_Id_QuestaoDificuldade" class="form-control" min="0" max="5" />
                 </div>
 
-                <div class="card">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><input type="text" class="form-control" onkeyup="searchTags(_Id_)" onblur="hideTags('#_Id_Tags')" id="_Id_TagComboBox" /></li>
-                        <span id="_Id_TagComboBoxList" style="position: absolute">
-                        </span>
-                    </ul>
-                </div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#TagModal" onclick="setTag(_Id_)">
+                    Add Tag
+                </button>
 
-                <div id="_Id_Tags">
+                <div class="card" id="tblQuestao_Id_Tag">
 
                 </div>
 
@@ -107,7 +136,25 @@
 </ul>
 
 <label hidden id="TagBoxCard">
-    _Name_
+    <div class="card" >
+        <ul class="list-group list-group-flush" id="_Id_Questao_Id1_TagBoxCard">
+
+            <li class="list-group-item" style="background-color:_Color_;">
+                <label style="color: white;">_Name_</label>
+                <button type="button" class="close" aria-label="Uncheck" onclick="">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <div hidden>
+                    <input type="text" value="_Name_" name="_Id_Questao_Id1_TagNome" />
+                    <input type="text" value="_Color_" name="_Id_Questao_Id1_TagColor" />
+                </div>
+            </li>
+
+            <input type="checkbox" id="_Id_Questao_Id1_Tag" hidden checked>
+
+        </ul>
+    </div>
 </label>
 
 @section Scripts {

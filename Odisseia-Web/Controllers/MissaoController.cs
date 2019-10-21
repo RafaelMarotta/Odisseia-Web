@@ -83,20 +83,20 @@ namespace Controllers
                 return RedirectToAction("Logout", "Usuario");
             }
         }
-        
+
         /* 
          Rules for Create:
             -> The name of the inputs: 
                 "{ value1 }{ value2 { value2.1 } }{ value3 }{ value4 }"
-                * value1 = The Id auto-generated of the input class;
+                * value1 (Optional) = The Id auto-generated of the input class;
                 * value2 (Optional) = The class who the input class belongs;
-                    * value2.1 = That class Id;
+                    * value2.1 (Optional) = That class Id;
                 * value3 = The class name;
                 * value4 = The input name;
             Obs: all values starts in upper case;
             Ex:
-            name = "Id3Questao2AlternativaTexto",
-            name = "Id1QuestaoEnunciado", etc...
+            name = "3Questao2AlternativaTexto",
+            name = "1QuestaoEnunciado", etc...
         */
         [HttpPost]
         [ActionName("Create")]
@@ -106,40 +106,79 @@ namespace Controllers
             {
                 UserSessionController.ValidateUser(HttpContext);
 
-                //Add Questões
-                List<KeyValuePair<string, StringValues>> questoesEnunciado = collection.Where(q => q.Key.ToString().Contains("QuestaoEnunciado")).ToList<KeyValuePair<string, StringValues>>();
-                List<KeyValuePair<string, StringValues>> questoesDificuldade = collection.Where(q => q.Key.ToString().Contains("QuestaoDificuldade")).ToList<KeyValuePair<string, StringValues>>();
+                //Questao
+                    //Get list of Questao params from inputs
+                    List<KeyValuePair<string, StringValues>> questoesEnunciado = collection.Where(q => q.Key.ToString().Contains("QuestaoEnunciado")).ToList<KeyValuePair<string, StringValues>>();
+                    List<KeyValuePair<string, StringValues>> questoesDificuldade = collection.Where(q => q.Key.ToString().Contains("QuestaoDificuldade")).ToList<KeyValuePair<string, StringValues>>();
 
-                List<QuestaoCreateDTO> questoesList = new List<QuestaoCreateDTO>();
+                    //Create a Questao list
+                    List<QuestaoCreateDTO> questoesList = new List<QuestaoCreateDTO>();
 
-                foreach(KeyValuePair<string, StringValues> qstE in questoesEnunciado)
-                {
-                    int idQ = int.Parse(qstE.Key.ToString()[0].ToString());
-                    KeyValuePair<string, StringValues> qstD = questoesDificuldade.First(q => int.Parse(q.Key.ToString()[0].ToString()) == idQ);
-
-                    if(qstD.Key != null)
+                    //Bind inputs into Questao list 
+                    foreach(KeyValuePair<string, StringValues> qstE in questoesEnunciado)
                     {
-                        List<KeyValuePair<string, StringValues>> alternativasTexto = collection.Where(a => a.Key.ToString().Contains($"Questao{idQ}AlternativaTexto")).ToList<KeyValuePair<string, StringValues>>();
-                        List<KeyValuePair<string, StringValues>> alternativasCorreto = collection.Where(a => a.Key.ToString().Contains($"Questao{idQ}AlternativaCorreto")).ToList<KeyValuePair<string, StringValues>>();
+                        //Find Questao Id in the input
+                        int idQ = int.Parse(qstE.Key.ToString()[0].ToString());
+                        //Find others inputs of the same Questao
+                        KeyValuePair<string, StringValues> qstD = questoesDificuldade.First(q => int.Parse(q.Key.ToString()[0].ToString()) == idQ);
 
-                        List<AlternativaCreateDTO> alternativasList = new List<AlternativaCreateDTO>();
-
-                        foreach(KeyValuePair<string, StringValues> altT in alternativasTexto)
+                        if(qstD.Key != null)
                         {
-                            int idA = int.Parse(altT.Key.ToString()[0].ToString());
-                            KeyValuePair<string, StringValues> altC = alternativasCorreto.First(a => int.Parse(a.Key.ToString()[0].ToString()) == idA);
+                            //Alternativa
+                                //Get list of Alternativa params from inputs
+                                List<KeyValuePair<string, StringValues>> alternativasTexto = collection.Where(a => a.Key.ToString().Contains($"Questao{idQ}AlternativaTexto")).ToList<KeyValuePair<string, StringValues>>();
+                                List<KeyValuePair<string, StringValues>> alternativasCorreto = collection.Where(a => a.Key.ToString().Contains($"Questao{idQ}AlternativaCorreto")).ToList<KeyValuePair<string, StringValues>>();
+
+                                //Create a Alternativa list
+                                List<AlternativaCreateDTO> alternativasList = new List<AlternativaCreateDTO>();
+
+                                //Bind inputs into Alternativa list 
+                                foreach (KeyValuePair<string, StringValues> altT in alternativasTexto)
+                                {
+                                    //Find Alternativa Id in the input
+                                    int idA = int.Parse(altT.Key.ToString()[0].ToString());
+                                    //Find others inputs of the same Alternativa
+                                    KeyValuePair<string, StringValues> altC = alternativasCorreto.First(a => int.Parse(a.Key.ToString()[0].ToString()) == idA);
                         
-                            if(altC.Key != null)
-                            {
-                                alternativasList.Add(new AlternativaCreateDTO { texto = altT.Value, correto = bool.Parse(altC.Value) });
-                            }
+                                    if(altC.Key != null)
+                                    {
+                                        //Add a Alternativa in the Alternativa list
+                                        alternativasList.Add(new AlternativaCreateDTO { texto = altT.Value, correto = bool.Parse(altC.Value) });
+                                    }
+                                }
+                            //End Alternativa
+
+                            //Tag
+                                //Get list of Tag params from inputs
+                                List<KeyValuePair<string, StringValues>> tagNome = collection.Where(a => a.Key.ToString().Contains($"Questao{idQ}TagNome")).ToList<KeyValuePair<string, StringValues>>();
+                                List<KeyValuePair<string, StringValues>> tagColor = collection.Where(a => a.Key.ToString().Contains($"Questao{idQ}TagColor")).ToList<KeyValuePair<string, StringValues>>();
+
+                                //Create a Tag list
+                                List<TagCreateDTO> tagsList = new List<TagCreateDTO>();
+
+                                //Bind inputs into Tag list 
+                                foreach (KeyValuePair<string, StringValues> tagN in tagNome)
+                                {
+                                    //Find Tag Id in the input
+                                    int idT = int.Parse(tagN.Key.ToString()[0].ToString());
+                                    //Find others inputs of the same Tag
+                                    KeyValuePair<string, StringValues> tagC = tagColor.First(a => int.Parse(a.Key.ToString()[0].ToString()) == idT);
+
+                                    if (tagC.Key != null)
+                                    {
+                                        //Add a Alternativa in the Tag list
+                                        tagsList.Add(new TagCreateDTO { Nome = tagN.Value, Color = tagC.Value });
+                                    }
+                                }
+                            //End Tag
+
+                            //Add a Questao in the Questao list
+                            questoesList.Add(new QuestaoCreateDTO { alternativas = alternativasList, tags = tagsList,  dificuldade = int.Parse(qstD.Value), enunciado = qstE.Value });
                         }
-
-                        List<TagCreateDTO> tagList = new List<TagCreateDTO>();
-                        questoesList.Add(new QuestaoCreateDTO { alternativas = alternativasList, dificuldade = int.Parse(qstD.Value), enunciado = qstE.Value , tags = tagList});
                     }
-                }
+                //End Questao
 
+                //Bind inputs into a Missao 
                 MissaoCreateDTO missao = new MissaoCreateDTO
                 {
                     titulo = collection["MissaoTitulo"],
