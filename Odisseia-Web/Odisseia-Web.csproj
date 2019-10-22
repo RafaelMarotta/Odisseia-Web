@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\NovaPasta1\**" />
+    <Content Remove="wwwroot\NovaPasta1\**" />
+    <EmbeddedResource Remove="wwwroot\NovaPasta1\**" />
+    <None Remove="wwwroot\NovaPasta1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\js\FormController.js" />
     <Content Remove="wwwroot\js\JavaScript.js" />
     <Content Remove="wwwroot\js\ViewMissaoCreateControllers\CardQuestao.js" />
@@ -20,6 +27,10 @@
     <Content Update="Views\Relatorio\_View_Relatorio_Turma.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\NovaPasta\" />
   </ItemGroup>
 
 </Project>

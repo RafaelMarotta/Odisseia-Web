@@ -18,6 +18,16 @@
     background-color: #828282;
 }
 
+@font-face {
+    font-family: Augustus;
+    src: url(../NovaPasta/AUGUSTUS.TTF);
+}
+
+@font-face {
+    font-family: TitiliumWeb-Regular;
+    src: url(../NovaPasta/TitilliumWeb-Regular.ttf);
+}
+
 /*Paddings*/
 .p-20 {
     padding: 20px;
@@ -123,6 +133,14 @@
 
 .mb-30 {
     margin-bottom: 30px;
+}
+
+.mb-50 {
+    margin-bottom: 50px;
+}
+
+.mb-90 {
+    margin-bottom: 90px;
 }
 
 .ml-5 {

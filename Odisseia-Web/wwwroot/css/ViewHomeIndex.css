@@ -1,0 +1,130 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background-color: #161310;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+h4, p, label{
+    color: #FFFFFF;
+    font-family: TitiliumWeb-Regular;
+}
+
+nav {
+    background-color: transparent;
+    z-index: 1;
+}
+
+    nav a {
+        margin-left: 35px;
+        font-family: TitiliumWeb-Regular;
+    }
+
+    nav img {
+        max-width: 85px;
+    }
+
+.background {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+    .background::after {
+        content: "";
+        position: absolute;
+        background-image: url("../images/background_LandingPage.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        animation: anim 20s infinite linear;
+    }
+
+    @keyframes anim{
+        50%{
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .background a img {
+        max-width: 65px;
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    box-sizing: border-box;
+    padding: 0 40px;
+    text-align: center;
+}
+
+    .content h1 {
+        margin: 0;
+        padding: 0;
+        color: #FFFFFF;
+        font-family: Augustus;
+        font-size: 50px;
+    }
+
+    .content hr {
+        margin: 0;
+        padding: 0;
+        background-color: #FFFFFF;
+    }
+
+
+/* Container */
+.container div h4{
+    margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: #161310;
+}
+
+    footer h5 {
+        color: #FFFFFF;
+        font-family: Augustus;
+    }
+
+    footer hr {
+        background-color: #FFFFFF;
+        width: 90%;
+        
+    }
+
+
+.footer-copyright {
+    color: #FFFFFF;
+    font-family: TitiliumWeb-Regular;
+}
+
+    .footer-copyright a, ul li a{
+        color: #FFFFFF;
+        font-family: TitiliumWeb-Regular;
+        text-decoration: none;
+    }
+
+i{
+    margin-right: 5px;
+    color: #FFFFFF;
+}
