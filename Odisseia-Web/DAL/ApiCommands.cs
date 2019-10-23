@@ -15,7 +15,7 @@
         LoginUsuario,
         CriarUsuario,
         ListarCardMissaoProfessor,
-        RelatorioBasico,
+        BasicReportClass,
         NotImplementedCommand,
         LoginProfessor,
         ListarTags

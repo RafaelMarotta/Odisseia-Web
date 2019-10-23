@@ -1,4 +1,5 @@
-﻿@model IList<Models.Relatorio.RelatorioListarDTO>
+﻿@model IList<Models.Relatorio.BasicReportClassDTO>
+@using Utils;
 
 <style>
     .cursor-h:hover {
@@ -8,29 +9,6 @@
 
 <link rel="stylesheet" href="~/css/ViewRelatorioTurma.css" />
 <script type="text/javascript" src="~/js/ViewRelatorioTurma.js"></script>
-
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Missão</th>
-            <th scope="col">Aluno</th>
-            <th scope="col">Número de Acertos</th>
-            <th scope="col">Número de Erros</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Models.Relatorio.RelatorioListarDTO relatorio in Model)
-        {
-            <tr>
-                <td>@relatorio.missao</td>
-                <td>@relatorio.aluno</td>
-                <td style="color: forestgreen">@relatorio.acertos</td>
-                <td style="color: firebrick">@relatorio.erros</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
 <div class="row">
     <div class="col-md">
         <h4 class="mb-20"><u>RELATÓRIO DE MISSÃO POR TURMA</u></h4>
@@ -38,33 +16,35 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        <div class="card">
-            <div class="card-body text-center">
-                <div class="col-md">
-                    <h5 class="mb-3">*Revisão para a prova Trimestral*</h5>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <h6><u>MÉDIA ACERTOS</u></h6>
-                            <h5>*15*</h5>
+        @foreach (Models.Relatorio.BasicReportClassDTO report in Model)
+        {
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="col-md">
+                        <h5 class="mb-3">*Revisão para a prova Trimestral*</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <h6><u>MÉDIA ACERTOS</u></h6>
+                                <h5>@DateUtils.FormatPercentage(report.RightAverage)</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h6><u>MÉDIA ERROS</u></h6>
+                                <h5>@DateUtils.FormatPercentage(report.WrongAverage)</h5>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <h6><u>MÉDIA ERROS</u></h6>
-                            <h5>*15*</h5>
+                        <div class="row text-center">
+                            <div class="col-md">
+                                <h6>TEMPO MÉDIO GASTO: @DateUtils.FormatTimeSpan(report.TimeAverage)</h6>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-md">
-                            <h6>TEMPO MÉDIO GASTO: *00:00:00*</h6>
+                        <div class="row">
+                            <button type="button" class="btn laranja_back white mt-3" onclick="ShowResultStudent()">VER RESULTADO POR ALUNO</button>
                         </div>
-                    </div>
-                    <div class="row">
-                        <button type="button" class="btn laranja_back white mt-3" onclick="ShowResultStudent()">VER RESULTADO POR ALUNO</button>
                     </div>
                 </div>
-
             </div>
+        }
         </div>
-    </div>
     <div class="col-md-8">
         <div id="ResultStudent">
             <h5>*Revisão para a prova Trimestral* - Aluno</h5>

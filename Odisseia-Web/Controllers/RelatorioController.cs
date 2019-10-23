@@ -17,7 +17,7 @@ namespace Controllers
             {
                 UserSessionController.ValidateUser(HttpContext);
 
-                HttpResponseMessage result = await DALApi.GET(ApiCommands.RelatorioBasico);
+                HttpResponseMessage result = await DALApi.GET(ApiCommands.BasicReportClass);
 
                 if (!result.IsSuccessStatusCode)
                 {
@@ -28,7 +28,7 @@ namespace Controllers
 
                 result.EnsureSuccessStatusCode();
 
-                IList<RelatorioListarDTO> relatorio = JsonConvert.DeserializeObject<IList<RelatorioListarDTO>>(await result.Content.ReadAsStringAsync());
+                IList<BasicReportClassDTO> relatorio = JsonConvert.DeserializeObject<IList<BasicReportClassDTO>>(await result.Content.ReadAsStringAsync());
 
                 return View("_View_Relatorio_Turma", relatorio);
             }
