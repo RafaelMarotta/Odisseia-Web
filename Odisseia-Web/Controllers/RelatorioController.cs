@@ -37,5 +37,34 @@ namespace Controllers
                 return RedirectToAction("Logout", "Usuario");
             }
         }
+
+        [HttpGet]
+        public async Task<string> StudentsReports(int questId)
+        {
+            try
+            {
+                UserSessionController.ValidateUser(HttpContext);
+
+                HttpResponseMessage response = await DALApi.GET(ApiCommands.BasicReportStudent, questId);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    ViewData["error"] = true;
+                    ViewData["errorMessage"] = "Erro de conexão, Tente novamente mais tarde";
+                    RedirectToAction("Index", "Missao");
+                    return "error";
+                }
+
+                response.EnsureSuccessStatusCode();
+
+                return await response.Content.ReadAsStringAsync();
+
+            }
+            catch (UserNotLoggedException)
+            {
+                RedirectToAction("Logout", "Usuario");
+                return "error";
+            }
+        }
     }
 }

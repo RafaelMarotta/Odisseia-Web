@@ -18,7 +18,14 @@ namespace Controllers
 
         public static UsuarioDTO GetUser(HttpContext context)
         {
-            return JsonConvert.DeserializeObject<UsuarioDTO>(context.Session.GetString(_userKey));
+            try
+            {
+                return JsonConvert.DeserializeObject<UsuarioDTO>(context.Session.GetString(_userKey));
+            }
+            catch(ArgumentNullException)
+            {
+                throw new UserNotLoggedException("_View_Usuario_Login");
+            }
         }
 
         public static void CleanUser(HttpContext context)
@@ -28,10 +35,7 @@ namespace Controllers
 
         public static void ValidateUser(HttpContext context)
         {
-            if (GetUser(context) == null)
-            {
-                throw new UserNotLoggedException("_View_Usuario_Login");
-            }
+            GetUser(context);
         }
     }
 }

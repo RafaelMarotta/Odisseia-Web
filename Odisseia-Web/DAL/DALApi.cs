@@ -23,6 +23,7 @@ namespace OdisseiaWeb.DAL
             { ApiCommands.DeletarUsuario, "/api/Usuario/" },
             { ApiCommands.LoginUsuario, "/api/Usuario/Login" },
             { ApiCommands.BasicReportClass, "/api/Relatorio/BasicReportClass" },
+            { ApiCommands.BasicReportStudent, "/api/Relatorio/BasicReportStudent/" },
             { ApiCommands.CriarUsuario, "/api/Usuario" },
             { ApiCommands.LoginProfessor, "/api/Professor/Login" },
             { ApiCommands.ListarTags, "/api/Tag" }

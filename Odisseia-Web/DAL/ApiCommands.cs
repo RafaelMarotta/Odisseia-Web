@@ -16,8 +16,9 @@
         CriarUsuario,
         ListarCardMissaoProfessor,
         BasicReportClass,
-        NotImplementedCommand,
+        BasicReportStudent,
         LoginProfessor,
-        ListarTags
+        ListarTags,
+        NotImplementedCommand
     }
 }
