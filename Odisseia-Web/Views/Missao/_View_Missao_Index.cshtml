@@ -30,7 +30,7 @@ catch (Exception) { }
                         <tbody>
                             @foreach (Models.Missao.MissaoListarDTO missao in Model.Where(m => !m.lancada))
                             {
-                                <form asp-action="Lancar" asp-controller="Missao">
+                                <form asp-action="Lancar" asp-controller="Missao" onsubmit="submit.disabled = true; return true;">
                                     <tr>
                                         <input type="hidden" id="MissaoId" name="MissaoId" value="@missao.id" />
                                         <td>@missao.titulo</td>
@@ -39,7 +39,7 @@ catch (Exception) { }
                                         <td>
                                             <input name="MissaoPrazo" type="datetime-local" min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-ddThh:mm:ss")" class="form-control" required />
                                         </td>
-                                        <td><button type="submit" class="btn lancarmissaoid laranja_back white">LANÇAR</button></td>
+                                        <td><button name="submit" type="submit" class="btn lancarmissaoid laranja_back white">LANÇAR</button></td>
                                     </tr>
                                 </form>
                             }

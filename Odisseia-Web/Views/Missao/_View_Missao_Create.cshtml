@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<form asp-action="Create" asp-controller="Missao">
+<form asp-action="Create" asp-controller="Missao" onsubmit="submit.disabled = true; return true;">
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label">FINALIZAR</label><br />
-                <input type="submit" value="CRIAR MISSÃO" class="btn laranja_back white" style="width:100%;" />
+                <input type="submit" name="submit" value="CRIAR MISSÃO" class="btn laranja_back white" style="width:100%;" />
             </div>
         </div>
         <div class="col-md-8">
