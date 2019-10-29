@@ -7,8 +7,8 @@ namespace Models.Relatorio
         public int Id { get; set; }
         public int StudentId { get; set; }
         public string StudentName { get; set; }
-        public int RightAverage { get; set; }
-        public int WrongAverage { get; set; }
+        public int RightCount { get; set; }
+        public int WrongCount { get; set; }
         public TimeSpan TimeSpent { get; set; }
     }
 }
