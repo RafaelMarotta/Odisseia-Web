@@ -35,7 +35,7 @@ namespace Odisseia_Web
 
             services.AddSession(options => {
                 options.Cookie.IsEssential = true;
-                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.IdleTimeout = TimeSpan.FromHours(4);
             });
 
 
