@@ -47,6 +47,12 @@ function addTag() {
     idT++;
 }
 
-function removeTag(sender) {
-    $(sender).parent().parent().parent().remove();
+function remove(card) {
+    $(card).remove();
+}
+
+function setDeleteCard(card, label) {
+    $("#inputDeleteModal").html(label);
+    $("#funcDeleteModal").removeAttr('onclick');
+    $("#funcDeleteModal").attr("onclick", "remove('#"+card+"');");
 }
