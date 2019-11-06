@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\Exceptions\HttpExceptions\" />
     <Folder Include="wwwroot\NovaPasta\" />
   </ItemGroup>
 

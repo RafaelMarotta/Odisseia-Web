@@ -3,6 +3,7 @@ using Models.Usuario;
 using Newtonsoft.Json;
 using Controllers.Exceptions;
 using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Controllers
 {
@@ -24,7 +25,7 @@ namespace Controllers
             }
             catch(ArgumentNullException)
             {
-                throw new UserNotLoggedException("_View_Usuario_Login");
+                throw new UserNotLoggedException("Usuário não logado ou tempo expirado");
             }
         }
 
@@ -33,7 +34,7 @@ namespace Controllers
             context.Session.Remove(_userKey);
         }
 
-        public static void ValidateUser(HttpContext context)
+        public static void VerifyUser(HttpContext context)
         {
             GetUser(context);
         }

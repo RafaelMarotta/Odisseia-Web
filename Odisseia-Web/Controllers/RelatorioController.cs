@@ -6,35 +6,24 @@ using System.Collections.Generic;
 using System.Net.Http;
 using Models.Relatorio;
 using System.Threading.Tasks;
+using System.Web;
+using System;
 
 namespace Controllers
 {
-    public class RelatorioController : Controller
+    public class RelatorioController : OdisseiaWebBaseController
     {
-        public async Task<IActionResult> Index()
+        public override async Task<IActionResult> Index() 
         {
             try
             {
-                UserSessionController.ValidateUser(HttpContext);
-
-                HttpResponseMessage result = await DALApi.GET(ApiCommands.BasicReportClass);
-
-                if (!result.IsSuccessStatusCode)
-                {
-                    ViewData["error"] = true;
-                    ViewData["errorMessage"] = "Erro de conexão, Tente novamente mais tarde";
-                    return RedirectToAction("Index", "Missao");
-                }
-
-                result.EnsureSuccessStatusCode();
-
-                IList<BasicReportClassDTO> relatorio = JsonConvert.DeserializeObject<IList<BasicReportClassDTO>>(await result.Content.ReadAsStringAsync());
-
+                UserSessionController.VerifyUser(HttpContext);
+                IList<BasicReportClassDTO> relatorio = await _dataFilter<IList<BasicReportClassDTO>>(await DALApi.GET(ApiCommands.BasicReportClass));
                 return View("_View_Relatorio_Turma", relatorio);
             }
-            catch (UserNotLoggedException)
+            catch (Exception e)
             {
-                return RedirectToAction("Logout", "Usuario");
+                return await _treatException(e, HttpContext);
             }
         }
 
@@ -43,27 +32,13 @@ namespace Controllers
         {
             try
             {
-                UserSessionController.ValidateUser(HttpContext);
-
-                HttpResponseMessage response = await DALApi.GET(ApiCommands.BasicReportStudent, questId);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    ViewData["error"] = true;
-                    ViewData["errorMessage"] = "Erro de conexão, Tente novamente mais tarde";
-                    RedirectToAction("Index", "Missao");
-                    return "error";
-                }
-
-                response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadAsStringAsync();
-
+                UserSessionController.VerifyUser(HttpContext);
+                return await _dataFilter(await DALApi.GET(ApiCommands.BasicReportStudent, questId));
             }
-            catch (UserNotLoggedException)
+            catch (Exception e)
             {
-                RedirectToAction("Logout", "Usuario");
-                return "error";
+                await _treatException(e, HttpContext);
+                return "";
             }
         }
     }

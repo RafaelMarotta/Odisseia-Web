@@ -10,6 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/general.js"></script>
+
     <environment include="Development,Production">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/general.css" />
@@ -48,14 +51,14 @@
                         style="width: 100%; background-color: #213950; border: none;">
                     ENTRAR
                 </button>
-                @try
-                {
-                    if (bool.Parse(ViewData["error"].ToString()))
+                @{ if (TempData["message"] != null)
                     {
-                        <p style="color:red"> @ViewData["errorMessage"].ToString() </p>
+                        <div id="messageCard" class="alert alert-@TempData["status"].ToString() d-flex justify-content-between m-1" role="alert">
+                            <label>@TempData["message"].ToString()</label>
+                            <span class="cursor-h" onclick="remove(messageCard);">&times;</span>
+                        </div>
                     }
                 }
-                catch (Exception) { }
             </form>
         </div>
     </div>

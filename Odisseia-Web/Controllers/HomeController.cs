@@ -15,7 +15,6 @@ namespace Controllers
         {
             try
             {
-                UserSessionController.ValidateUser(HttpContext);
 
                 return View("_View_Home_Home");
             }

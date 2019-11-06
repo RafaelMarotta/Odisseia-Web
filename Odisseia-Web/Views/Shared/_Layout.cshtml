@@ -8,6 +8,10 @@
 
     <environment include="Development,Production">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+        <!-- JS -->
+        <script src="~/js/general.js"></script>
 
         <!-- CSS -->
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -34,6 +38,15 @@
 </head>
 <body>
 
+    @{ if (TempData["message"] != null)
+        {
+            <div id="messageCard" class="alert alert-@TempData["status"].ToString() d-flex justify-content-between fixed-top position-absolute ml-5 mr-5" role="alert">
+                <label>@TempData["message"].ToString()</label>
+                <span class="cursor-h" onclick="remove(messageCard);">&times;</span>
+            </div>
+        }
+    }
+
     <div class="sidebar" id="sidebar">
         <div class="sidebar-logo">
             <img src="~/images/Logo_Reduzida_Branca.png" class="img-fluid" />
@@ -46,7 +59,7 @@
                 </a>
             </div>
             <div>
-                <a onclick="Dropdown()">
+                <a class="cursor-h" onclick="Dropdown()">
                     <img src="~/images/icon_missoes_white.png" class="img-fluid sidebar-icons" />
                     MISSÃO
                 </a>

@@ -20,32 +20,19 @@ using System.Globalization;
 
 namespace Controllers
 {
-    public class MissaoController : Controller
+    public class MissaoController : OdisseiaWebBaseController
     {
-        public async Task<IActionResult> Index()
+        public override async Task<IActionResult> Index()
         {
             try
             {
-                UserSessionController.ValidateUser(HttpContext);
-
-                HttpResponseMessage result = await DALApi.GET(ApiCommands.ListarCardMissaoProfessor, UserSessionController.GetUser(HttpContext).id);
-
-                if (!result.IsSuccessStatusCode)
-                {
-                    ViewData["error"] = true;
-                    ViewData["errorMessage"] = "Erro de conexão, Tente novamente mais tarde";
-                    return RedirectToAction("Logout", "Usuario");
-                }
-
-                result.EnsureSuccessStatusCode();
-
-                IList<MissaoListarDTO> missoes = JsonConvert.DeserializeObject<IList<MissaoListarDTO>>(await result.Content.ReadAsStringAsync());
-
+                UserSessionController.VerifyUser(HttpContext);
+                IList<MissaoListarDTO> missoes = await _dataFilter<IList<MissaoListarDTO>>(await DALApi.GET(ApiCommands.ListarCardMissaoProfessor, UserSessionController.GetUser(HttpContext).id));
                 return View("_View_Missao_Index", missoes);
             }
-            catch (UserNotLoggedException)
+            catch (Exception e)
             {
-                return RedirectToAction("Logout", "Usuario");
+                return await _treatException(e, HttpContext);
             }
         }
 
@@ -54,33 +41,13 @@ namespace Controllers
         {
             try
             {
-                UserSessionController.ValidateUser(HttpContext);
-
-                HttpResponseMessage result = await DALApi.GET(ApiCommands.ListarMaterias);
-
-                if (!result.IsSuccessStatusCode)
-                {
-                    ViewData["error"] = true;
-                    ViewData["errorMessage"] = "Erro de conexão, Tente novamente mais tarde";
-                    return RedirectToAction("Index", "Missao");
-                }
-
-                result.EnsureSuccessStatusCode();
-
-                IList<MateriaListarDTO> materias = JsonConvert.DeserializeObject<IList<MateriaListarDTO>>(await result.Content.ReadAsStringAsync());
-
-                if (materias == null)
-                {
-                    ViewData["error"] = true;
-                    ViewData["errorMessage"] = "Erro de conexão, Tente novamente mais tarde";
-                    return RedirectToAction("Index", "Missao");
-                }
-
+                UserSessionController.VerifyUser(HttpContext);
+                IList<MateriaListarDTO> materias = await _dataFilter<IList<MateriaListarDTO>>(await DALApi.GET(ApiCommands.ListarMaterias));
                 return View("_View_Missao_Create", materias);
             }
-            catch (UserNotLoggedException)
+            catch (Exception e)
             {
-                return RedirectToAction("Logout", "Usuario");
+                return await _treatException(e, HttpContext);
             }
         }
 
@@ -104,11 +71,10 @@ namespace Controllers
         {
             try
             {
-                UserSessionController.ValidateUser(HttpContext);
-
+                UserSessionController.VerifyUser(HttpContext);
                 //Questao
-                    //Get list of Questao params from inputs
-                    List<KeyValuePair<string, StringValues>> questoesEnunciado = collection.Where(q => q.Key.ToString().Contains("QuestaoEnunciado")).ToList<KeyValuePair<string, StringValues>>();
+                //Get list of Questao params from inputs
+                List<KeyValuePair<string, StringValues>> questoesEnunciado = collection.Where(q => q.Key.ToString().Contains("QuestaoEnunciado")).ToList<KeyValuePair<string, StringValues>>();
                     List<KeyValuePair<string, StringValues>> questoesDificuldade = collection.Where(q => q.Key.ToString().Contains("QuestaoDificuldade")).ToList<KeyValuePair<string, StringValues>>();
 
                     //Create a Questao list
@@ -188,20 +154,14 @@ namespace Controllers
                     questoes = questoesList
                 };
 
-                HttpResponseMessage result = await DALApi.POST(ApiCommands.CadastarMissao, missao);
-
-                if (!result.IsSuccessStatusCode)
-                {
-                    ViewData["error"] = true;
-                    ViewData["errorMessage"] = "Erro ao criar missão, Tente novamente mais tarde";
-                    return RedirectToAction("Index", "Missao");
-                }
-
+                await _dataFilter<string>(await DALApi.POST(ApiCommands.CadastarMissao, missao));
+                TempData["status"] = "success";
+                TempData["message"] = "Missão criada com sucesso";
                 return await Index();
             }
-            catch (UserNotLoggedException)
+            catch (Exception e)
             {
-                return RedirectToAction("Logout", "Usuario");
+                return await _treatException(e, HttpContext);
             }
         }
 
@@ -209,29 +169,24 @@ namespace Controllers
         public async Task<IActionResult> Lancar(IFormCollection collection)
         {
             try
-            { 
-                UserSessionController.ValidateUser(HttpContext);
-
+            {
+                UserSessionController.VerifyUser(HttpContext);
                 MissaoLancarDTO missao = new MissaoLancarDTO
                 {
                     DataPrazo = DateTime.Parse(collection["MissaoPrazo"].ToString()).Ticks,
                     MissaoId = int.Parse(collection["MissaoId"])
                 };
 
-                HttpResponseMessage result = await DALApi.PUT(ApiCommands.LancarMissao, missao);
+                await _dataFilter<string>(await DALApi.PUT(ApiCommands.LancarMissao, missao));
 
-                if (!result.IsSuccessStatusCode)
-                {
-                    ViewData["error"] = true;
-                    ViewData["errorMessage"] = "Erro ao lançar missão, Tente novamente mais tarde";
-                    return RedirectToAction("Index", "Missao");
-                }
-
+                DateTime prazo = new DateTime(missao.DataPrazo);
+                TempData["status"] = "success";
+                TempData["message"] = $"Missão lançada para dia {prazo.ToString("dd/MM/yyyy")} as {prazo.ToString("HH:mm")}h";
                 return await Index();
             }
-            catch (UserNotLoggedException)
+            catch (Exception e)
             {
-                return RedirectToAction("Logout", "Usuario");
+                return await _treatException(e, HttpContext);
             }
         }
     }

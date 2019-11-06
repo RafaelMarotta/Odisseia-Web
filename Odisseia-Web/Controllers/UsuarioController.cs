@@ -9,17 +9,15 @@ using Models.Usuario;
 using OdisseiaWeb.DAL;
 using Newtonsoft.Json;
 using Models.Usuario.Enum;
+using System.Net;
 
 namespace Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuarioController : OdisseiaWebBaseController
     {
-        [HttpGet]
-        public async Task<IActionResult> LoginWrong()
+        public override async Task<IActionResult> Index()
         {
-            ViewData["error"] = true;
-            ViewData["errorMessage"] = "Login ou senha inválidos!";
-            return await Task.Run(() => View("_View_Usuario_Login"));
+            return Login();
         }
 
         [HttpGet]
@@ -31,33 +29,24 @@ namespace Controllers
         [HttpPost]
         [ActionName("Login")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> LoginConfirmed(IFormCollection collection)
+        public async Task<IActionResult> LoginConfirmed(IFormCollection collection)
         {
-            UsuarioLoginDTO usuarioLogin = new UsuarioLoginDTO
+            try
             {
-                login = collection["UsuarioLogin"].ToString().ToLower(),
-                senha = collection["UsuarioSenha"]
-            };
-
-            HttpResponseMessage result = await DALApi.POST(ApiCommands.LoginProfessor, usuarioLogin);
-
-            if (!result.IsSuccessStatusCode)
-            {
-                return RedirectToAction("LoginWrong","Usuario");
+                UsuarioLoginDTO usuarioLogin = new UsuarioLoginDTO
+                {
+                    login = collection["UsuarioLogin"].ToString().ToLower(),
+                    senha = collection["UsuarioSenha"]
+                };
+                
+                UsuarioDTO usuario = await _dataFilter<UsuarioDTO>(await DALApi.POST(ApiCommands.LoginProfessor, usuarioLogin));
+                UserSessionController.SetUser(HttpContext, usuario);
+                return RedirectToAction("Index", "Relatorio");
             }
-
-            result.EnsureSuccessStatusCode();
-
-            UsuarioDTO usuario = JsonConvert.DeserializeObject<UsuarioDTO>(await result.Content.ReadAsStringAsync());
-
-            if (usuario == null)
+            catch(Exception e)
             {
-                return RedirectToAction("LoginWrong","Usuario");
+                return await _treatException(e, HttpContext);
             }
-
-            UserSessionController.SetUser(HttpContext, usuario);
-
-            return RedirectToAction("Index", "Relatorio");
         }
 
         [HttpGet]
@@ -65,6 +54,23 @@ namespace Controllers
         {
             UserSessionController.CleanUser(HttpContext);
             return RedirectToAction("Index", "Home");
+        }
+
+        protected override void _httpRequestExceptionThrower(HttpStatusCode status)
+        {
+            switch (status)
+            {
+                case HttpStatusCode.OK:
+                    break;
+                case HttpStatusCode.BadRequest:
+                    throw new HttpRequestException("Erro ao tentar executar a ação, por favor tente mais tarde");
+                case HttpStatusCode.NotFound:
+                    throw new HttpRequestException("Login ou senha incorretos!");
+                case HttpStatusCode.InternalServerError:
+                    throw new HttpRequestException("Estamos com problemas em estabelecer uma conexão, por favor tente mais tarde");
+                default:
+                    throw new HttpRequestException("Problema inesperado, por favor tente mais tarde");
+            }
         }
     }
 }

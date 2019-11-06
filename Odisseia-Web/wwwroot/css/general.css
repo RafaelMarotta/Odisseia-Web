@@ -1,4 +1,8 @@
-﻿body {
+﻿.cursor-h:hover {
+    cursor: pointer;
+}
+
+body {
     background-color: #F5F5F5;
 }
 

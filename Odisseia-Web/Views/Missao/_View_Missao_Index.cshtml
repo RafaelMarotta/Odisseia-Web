@@ -1,14 +1,5 @@
 ﻿@model IList<Models.Missao.MissaoListarDTO>
 
-@try
-{
-    if (bool.Parse(ViewData["error"].ToString()))
-    {
-        <p style="color:red"> @ViewData["errorMessage"].ToString() </p>
-    }
-}
-catch (Exception) { }
-
 <link rel="stylesheet" href="~/css/ViewMissaoIndex.css" />
 
 <div class="row">
