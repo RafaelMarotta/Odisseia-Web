@@ -73,8 +73,8 @@ namespace Controllers
             {
                 UserSessionController.VerifyUser(HttpContext);
                 //Questao
-                //Get list of Questao params from inputs
-                List<KeyValuePair<string, StringValues>> questoesEnunciado = collection.Where(q => q.Key.ToString().Contains("QuestaoEnunciado")).ToList<KeyValuePair<string, StringValues>>();
+                    //Get list of Questao params from inputs
+                    List<KeyValuePair<string, StringValues>> questoesEnunciado = collection.Where(q => q.Key.ToString().Contains("QuestaoEnunciado")).ToList<KeyValuePair<string, StringValues>>();
                     List<KeyValuePair<string, StringValues>> questoesDificuldade = collection.Where(q => q.Key.ToString().Contains("QuestaoDificuldade")).ToList<KeyValuePair<string, StringValues>>();
 
                     //Create a Questao list
@@ -116,8 +116,8 @@ namespace Controllers
 
                             //Tag
                                 //Get list of Tag params from inputs
-                                List<KeyValuePair<string, StringValues>> tagNome = collection.Where(a => a.Key.ToString().Contains($"Questao{idQ}TagNome")).ToList<KeyValuePair<string, StringValues>>();
-                                List<KeyValuePair<string, StringValues>> tagColor = collection.Where(a => a.Key.ToString().Contains($"Questao{idQ}TagColor")).ToList<KeyValuePair<string, StringValues>>();
+                                List<KeyValuePair<string, StringValues>> tagNome = collection.Where(a => a.Key.ToString().Contains($"Questao{idQ}TagNome") || a.Key.ToString().Contains($"MissaoTagNome")).ToList<KeyValuePair<string, StringValues>>();
+                                List<KeyValuePair<string, StringValues>> tagColor = collection.Where(a => a.Key.ToString().Contains($"Questao{idQ}TagColor") || a.Key.ToString().Contains($"MissaoTagColor")).ToList<KeyValuePair<string, StringValues>>();
 
                                 //Create a Tag list
                                 List<TagCreateDTO> tagsList = new List<TagCreateDTO>();

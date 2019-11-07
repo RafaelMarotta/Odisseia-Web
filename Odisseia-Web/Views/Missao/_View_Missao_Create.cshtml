@@ -1,7 +1,6 @@
 ﻿@model IList<Models.Materia.MateriaListarDTO>
 
 <script type="text/javascript" src="~/js/ViewMissaoCreateControllers/FormController.js"></script>
-<script type="text/javascript" src="~/js/ViewMissaoCreateControllers/CardQuestao.js"></script>
 <link rel="stylesheet" href="~/css/ViewMissaoCreate.css" />
 
 <style>
@@ -36,6 +35,13 @@
                     }
                 </select>
             </div>
+            <!--Tags-->
+            <button type="button" class="btn laranja_back white" data-toggle="modal" data-target="#TagModal" onclick="setMissaoTag()">
+                ADICIONAR TAG GLOBAL
+            </button>
+            <div class="row">
+                <div class="col" id="tblMissaoTag"></div>
+            </div>
             <div class="form-group">
                 <label class="control-label">QUESTÕES:</label><br>
                 <label id="btnAddQuestao" class="cursor-h btn laranja_back white" onclick="addQuestao()" style="width:50%;">ADICIONAR QUESTAO</label>
@@ -59,18 +65,18 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <input id="TagQuestaoId" type="number" hidden required />
+                <input id="QuestaoTagId" type="number" hidden required />
                 <div class="form-group">
                     <label for="TagNome" class="control-label">NOME:</label>
-                    <input type="text" id="TagNome" class="form-control" required />
+                    <input type="text" id="TagNome" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <label for="TagColor" class="control-label">COR DA TAG:</label>
-                    <input class="form-control" type="color" id="TagColor" required />
+                    <input class="form-control" type="color" id="TagColor"/>
                 </div>
                 <div class="form-group text-right" style="margin: 0;">
                     <button type="button" class="btn cinza_back white" data-dismiss="modal">FECHAR</button>
-                    <button type="button" class="btn laranja_back white" data-dismiss="modal" onclick="addTag()">ADICIONAR</button>
+                    <button id="btnTagAdd" type="button" class="btn laranja_back white" data-dismiss="modal">ADICIONAR</button>
                 </div>
             </div>
         </div>
@@ -85,7 +91,7 @@
                 <label>Realmente deseja deletar o item <b id="inputDeleteModal"></b>?</label>
                 <div class="form-group text-right" style="margin: 0;">
                     <button type="button" class="btn cinza_back white" data-dismiss="modal">NÂO</button>
-                    <button id="funcDeleteModal" type="button" class="btn laranja_back white" data-dismiss="modal">SIM</button>
+                    <button id="btnDeleteModal" type="button" class="btn laranja_back white" data-dismiss="modal">SIM</button>
                 </div>
             </div>
         </div>
@@ -132,7 +138,7 @@
                                 </select>
                             </div>
                             <!--Tags-->
-                            <button type="button" class="btn laranja_back white" data-toggle="modal" data-target="#TagModal" onclick="setTag(_Id_)">
+                            <button type="button" class="btn laranja_back white" data-toggle="modal" data-target="#TagModal" onclick="setQuestaoTag(_Id_)">
                                 ADICIONAR TAG
                             </button>
                             <div class="row">
@@ -170,20 +176,19 @@
 </ul>
 
 <div hidden id="TagBoxCard">
-    <div class="card" id="_Id_Questao_Id1_TagBoxCard">
+    <div class="card" id="_Id__Class__Id1_TagBoxCard">
         <ul class="list-group list-group-flush">
             <li class="list-group-item" style="background-color:_Color_;">
                 <label style="color: white;">_Name_</label>
-                <button type="button" class="close" aria-label="Uncheck" onclick="remove('#_Id_Questao_Id1_TagBoxCard')">
+                <button type="button" class="close" aria-label="Uncheck" onclick="remove('#_Id__Class__Id1_TagBoxCard')">
                     <span aria-hidden="true">&nbsp;&nbsp;&times;&nbsp;&nbsp;</span>
                 </button>
 
                 <div hidden>
-                    <input type="text" value="_Name_" name="_Id_Questao_Id1_TagNome" />
-                    <input type="text" value="_Color_" name="_Id_Questao_Id1_TagColor" />
+                    <input type="text" value="_Name_" name="_Id__Class__Id1_TagNome" />
+                    <input type="text" value="_Color_" name="_Id__Class__Id1_TagColor" />
                 </div>
             </li>
-            <input type="checkbox" id="_Id_Questao_Id1_Tag" hidden checked>
         </ul>
     </div>
 </div>
