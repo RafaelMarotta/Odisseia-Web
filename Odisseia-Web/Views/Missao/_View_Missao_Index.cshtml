@@ -15,7 +15,7 @@
                                 <th scope="col">TÍTULO</th>
                                 <th scope="col">DESCRIÇÃO</th>
                                 <th scope="col">PRAZO</th>
-                                <th scope="col">NOVO PRAZO</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,7 +26,6 @@
                                         <input type="hidden" id="MissaoId" name="MissaoId" value="@missao.id" />
                                         <td>@missao.titulo</td>
                                         <td>@($"{missao.descricao.Substring(0, (missao.descricao.Length >= 25) ? 25 : missao.descricao.Length)}...")</td>
-                                        <td>@($"{missao.dataPrazo}")</td>
                                         <td>
                                             <input name="MissaoPrazo" type="datetime-local" min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-ddThh:mm:ss")" class="form-control" required />
                                         </td>

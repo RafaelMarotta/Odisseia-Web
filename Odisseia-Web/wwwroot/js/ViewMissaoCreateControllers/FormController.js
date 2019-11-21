@@ -65,7 +65,7 @@ function addQuestaoTag() {
 
 function setDeleteCard(card, label) {
     $("#inputDeleteModal").html(label);
-    setOnclick("#btnDeleteModal","remove('#"+card+"')");
+    setOnclick("btnDeleteModal","remove('#"+card+"')");
 }
 
 function setOnclick(local, newOnclick) {
