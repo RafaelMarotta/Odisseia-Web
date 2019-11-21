@@ -2,18 +2,50 @@
     cursor: pointer;
 }
 
+/*Structure*/
 body {
-    background-color: #F5F5F5;
+    background-color: #F3663B;
+    margin: 0px;
+    padding: 0px;
 }
 
 .content-container {
-    padding-top: 20px;
-    padding-left: 130px;
+    background-color: #F3663B;
+    padding-right: 10px;
 }
 
+.container-fluid {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: -10px;
+    margin-bottom: 0px;
+    background-color: #F5F5F5;
+    border-radius: 15px;
+    height: 97vh;
+}
+
+.scroll {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.fa-align-left{
+    color: #111;
+}
+
+    .fa-align-left:hover {
+        cursor: pointer;
+    }
+
+    .fa-align-left:active {
+        color: #F3663B;
+    }
+
+/*Components*/
 label, input, button, a, p, h1, h2, h3, h4, h5, h6, th, td, input {
     font-family: 'Titillium Web', sans-serif;
-    color: #828282;
+    color: #111;
 }
 
 .card {

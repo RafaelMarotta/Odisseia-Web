@@ -1,14 +1,20 @@
-﻿.sidebar {
+﻿.content-container {
+    padding-top: 20px;
+    padding-left: 170px;
+}
+
+/*Sidebar-Complete*/
+.sidebar {
     position: fixed;
-    width: 130px;
+    width: 160px;
     height: 100%;
     left: 0;
-    overflow-y: auto;
+    overflow-y:auto;
     background: #F3663B;
     color: #fff;
-    -webkit-box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.21);
+    /*-webkit-box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.21);
     -moz-box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.21);
-    box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.21);
+    box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.21);*/
 }
 
 .sidebar-logo {
@@ -19,57 +25,77 @@
     padding-top: 10px;
 }
 
-.sidebar-icons {
+/*.sidebar-icons {
     max-width: 40px;
     display: block;
     margin-left: auto;
     margin-right: auto;
+}*/
+
+.sidebar-icons {
+    max-width: 24px;
 }
 
 .sidebar-content {
-    text-align: center;
+    text-align: left;
 }
 
 .sidebar-content div {
-    padding-top: 30px;
-
+    padding-top: 10px;
 }
 
-.sidebar-content div a {
+.sidebar-content div a, span {
     text-decoration: none;
     color: #FFFFFF;
-    font-size: 13px;
+    font-size: 16px;
 }
 
-.content-container {
-    padding-top: 20px;
-    padding-left: 130px;
+.list-group-item {
+    background-color: #F3663B;
+    border: none;
 }
 
-@media screen and (max-width:600px){
+    .list-group-item span {
+        padding-left: 10px;
+        padding-right: 3px;
+    }
+
+    .list-group-item:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+
+.dropdown-item {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+    .dropdown-item span {
+        text-decoration: none;
+        color: #FFFFFF;
+        font-size: 13px;
+    }
+
+@media screen and (max-width:600px) {
     .sidebar {
         display: none;
     }
     .content-container{
-        padding-left: 0;
+        padding-left: 10px;
     }
 }
 
-@media screen and (min-width:600px) {
-    .bar-responsive {
-        display: none;
-    }
+/*Sidebar-Mini*/
+.Sidebar-mini {
+    position: fixed;
+    width: 160px;
+    height: 100%;
+    left: 0;
+    overflow-y: auto;
+    background: #000;
+    color: #fff;
 }
 
-.dropdown-content{
-    display: none;
-    background-color: transparent;
-    width: auto;
-    height: auto;
-    margin-top: -10px;
-}
-
-.dropdown-content a{
-    margin-bottom: 3px;
-    padding: 5px;
+.sidebar-icons-mini {
+    max-width: 40px;
 }

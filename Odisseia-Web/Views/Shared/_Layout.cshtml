@@ -12,6 +12,7 @@
 
         <!-- JS -->
         <script src="~/js/general.js"></script>
+        <script src="~/js/sideBar.js"></script>
 
         <!-- CSS -->
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -23,18 +24,6 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300&display=swap" rel="stylesheet">
     </environment>
-
-    <script>
-        function Dropdown() {
-            var x = document.getElementById("dropdown-content");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
-    </script>
-
 
 </head>
 <body>
@@ -53,40 +42,86 @@
             <img src="~/images/Logo_Reduzida_Branca.png" class="img-fluid" />
         </div>
         <div class="sidebar-content">
-            <div>
-                <a asp-action="Index" asp-controller="Relatorio">
-                    <img src="~/images/icon_relatorio_white.png" class="img-fluid sidebar-icons" />
-                    HOME
-                </a>
+            <div class="list-group">
+                <div>
+                    <a asp-action="Index" asp-controller="Relatorio" class="list-group-item">
+                        <img src="~/images/icon_relatorio_white.png" class="img-fluid sidebar-icons" />
+                        <span>HOME</span>
+                    </a>
+                </div>
+
+                <div>
+                    <a href="#missao" class="list-group-item" data-toggle="collapse" aria-expanded="false">
+                        <img src="~/images/icon_missoes_white.png" class="img-fluid sidebar-icons" />
+                        <span>MISSÃO</span>
+                        <i class="fas fa-caret-down"></i>
+                    </a>
+
+                    <div class="collapse " id="missao" data-parent="#missao">
+                        <a asp-action="Create" asp-controller="Missao" class="list-group-item dropdown-item">
+                            <span>Cadastro Missão</span>
+                        </a>
+                        <a asp-action="Index" asp-controller="Missao" class="list-group-item dropdown-item">
+                            <span>Lançar Missão</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <a asp-action="Index" asp-controller="Relatorio" class="list-group-item">
+                        <img src="~/images/icon_relatorio_white.png" class="img-fluid sidebar-icons" />
+                        <span>RELATÓRIO</span>
+                    </a>
+                </div>
+
+                <div>
+                    <a asp-action="Logout" asp-controller="Usuario" class="list-group-item">
+                        <img src="~/images/icon_logout_white.png" class="img-fluid sidebar-icons" />
+                        <span>LOGOUT</span>
+                    </a>
+                </div>
             </div>
-            <div>
-                <a class="cursor-h" onclick="Dropdown()">
-                    <img src="~/images/icon_missoes_white.png" class="img-fluid sidebar-icons" />
-                    MISSÃO
-                </a>
-            </div>
-            <div class="dropdown-content" id="dropdown-content">
-                <a asp-action="Create" asp-controller="Missao">Cadastro Missão</a>
-                <a asp-action="Index" asp-controller="Missao">Lançar Missão</a>
-            </div>
-            <div>
-                <a asp-action="Index" asp-controller="Relatorio">
-                    <img src="~/images/icon_relatorio_white.png" class="img-fluid sidebar-icons" />
-                    RELATÓRIO
-                </a>
-            </div>
-            <div>
-                <a asp-action="Logout" asp-controller="Usuario">
-                    <img src="~/images/icon_logout_white.png" class="img-fluid sidebar-icons" />
-                    LOGOUT
-                </a>
-            </div>
+            @*<div>
+                    <a asp-action="Index" asp-controller="Relatorio">
+                        <img src="~/images/icon_relatorio_white.png" class="img-fluid sidebar-icons" />
+                        HOME
+                    </a>
+                </div>
+                <div>
+                    <a class="cursor-h" onclick="Dropdown()">
+                        <img src="~/images/icon_missoes_white.png" class="img-fluid sidebar-icons" />
+                        MISSÃO
+                    </a>
+                </div>
+                <div class="dropdown-content" id="dropdown-content">
+                    <a asp-action="Create" asp-controller="Missao">Cadastro Missão</a>
+                    <a asp-action="Index" asp-controller="Missao">Lançar Missão</a>
+                </div>
+                <div>
+                    <a asp-action="Index" asp-controller="Relatorio">
+                        <img src="~/images/icon_relatorio_white.png" class="img-fluid sidebar-icons" />
+                        RELATÓRIO
+                    </a>
+                </div>
+                <div>
+                    <a asp-action="Logout" asp-controller="Usuario">
+                        <img src="~/images/icon_logout_white.png" class="img-fluid sidebar-icons" />
+                        LOGOUT
+                    </a>
+                </div>*@
         </div>
     </div>
 
     <div class="content-container">
-        <div class="container-fluid mb-20">
-            @RenderBody()
+        <div class="container-fluid">
+            <div class="scroll">
+                <div class="row">
+                    <div class="col-md">
+                        <i class="fas fa-align-left"></i>
+                    </div>
+                </div>
+                @RenderBody()
+            </div>
         </div>
     </div>
 
