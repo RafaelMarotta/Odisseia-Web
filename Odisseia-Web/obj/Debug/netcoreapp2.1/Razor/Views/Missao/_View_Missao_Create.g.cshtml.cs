@@ -66,7 +66,7 @@ using Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(49, 97, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ef495e5c45cf42f2a91a34e1495b77b4", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8089b5182cd049c0b2ce099ce23424fd", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -85,7 +85,7 @@ using Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(148, 59, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "6da7f40414d9449d9bd685855b5b62af", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "98f7f854b9384a1985da5ff0cfc65fc3", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -104,7 +104,7 @@ using Models;
             WriteLiteral("\r\n\r\n<style>\r\n    .cursor-h:hover {\r\n        cursor: pointer;\r\n    }\r\n</style>\r\n\r\n<div class=\"row\">\r\n    <div class=\"col-md\">\r\n        <h4 class=\"mb-20\"><u>CRIAR MISSÃO</u></h4>\r\n    </div>\r\n</div>\r\n\r\n");
             EndContext();
             BeginContext(407, 2232, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f0a6cc3a359e444f9f01b1657eded767", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6f970cf57d174180951510ccad22afb4", async() => {
                 BeginContext(505, 696, true);
                 WriteLiteral(@"
     <div class=""row"">
@@ -132,7 +132,7 @@ using Models;
                 WriteLiteral("                        ");
                 EndContext();
                 BeginContext(1329, 50, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "44b8e3bbdf9049a490e76acdc2576d7b", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c24a1412fffb404496783ce73956e08c", async() => {
                     BeginContext(1358, 12, false);
 #line 34 "C:\Users\pimen\Documents\Odisseia-Web\Odisseia-Web\Views\Missao\_View_Missao_Create.cshtml"
                                                Write(materia.nome);
@@ -300,7 +300,7 @@ using Models;
                                     ");
             EndContext();
             BeginContext(7194, 32, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7e36228b7db4068997e04ef154e06c9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5cc5dbbca2d64bf496fabcc45e5ec604", async() => {
                 BeginContext(7212, 5, true);
                 WriteLiteral("FÁCIL");
                 EndContext();
@@ -322,7 +322,7 @@ using Models;
             WriteLiteral("\r\n                                    ");
             EndContext();
             BeginContext(7264, 32, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "69174d8541f3423e89c6821cb252f0f0", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c828f0dae79144bcb1417433cc0e7563", async() => {
                 BeginContext(7282, 5, true);
                 WriteLiteral("MÉDIO");
                 EndContext();
@@ -344,7 +344,7 @@ using Models;
             WriteLiteral("\r\n                                    ");
             EndContext();
             BeginContext(7334, 34, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cfb4ab4a191c401e896516a13f307d18", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "117fd8dd27974b16845f992d4ae85814", async() => {
                 BeginContext(7352, 7, true);
                 WriteLiteral("DIFÍCIO");
                 EndContext();
