@@ -6,6 +6,9 @@
     overflow-y: auto;
     background: #F3663B;
     color: #fff;
+    -webkit-box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.21);
+    -moz-box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.21);
+    box-shadow: 3px 0px 5px 0px rgba(0,0,0,0.21);
 }
 
 .sidebar-logo {

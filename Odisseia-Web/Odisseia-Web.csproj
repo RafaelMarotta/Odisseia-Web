@@ -31,7 +31,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Exceptions\HttpExceptions\" />
-    <Folder Include="wwwroot\NovaPasta\" />
+    <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 
 </Project>

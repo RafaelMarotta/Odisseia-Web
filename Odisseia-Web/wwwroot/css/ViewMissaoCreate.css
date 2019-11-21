@@ -1,1 +1,18 @@
-﻿
+﻿.btnclose {
+    border: none;
+    background-color: transparent;
+    font-size: 13.5px;
+}
+
+    .btnclose:hover {
+        cursor: pointer;
+    }
+
+.btnCollapse {
+    border: none;
+    background-color: transparent;
+}
+
+    .btnCollapse:hover {
+        cursor: pointer;
+    }
