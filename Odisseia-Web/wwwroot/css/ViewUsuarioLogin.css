@@ -1,7 +1,8 @@
 ﻿body {
-    background-image: url("../images/background3.jpg");
+    background-image: url("../images/background_login.jpg");
     background-size: cover;
     background-attachment: fixed;
+    background-color: transparent;
 }
 
 .overlay{

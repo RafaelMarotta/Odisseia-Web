@@ -15,17 +15,39 @@ h4, p, label{
 
 nav {
     background-color: transparent;
-    z-index: 1;
+    z-index: 2;
 }
-
-    nav a {
-        margin-left: 35px;
-        font-family: TitiliumWeb-Regular;
-    }
 
     nav img {
         max-width: 85px;
     }
+
+    nav a {
+        margin-left: 35px;
+        font-family: TitiliumWeb-Regular;
+        color: #FFFFFF !important;
+    }
+
+        nav a:hover {
+            color: rgba(255,255,255,0.7) !important;
+        }
+
+@media screen and (max-width:600px) {
+
+    nav a {
+        color: #111 !important;
+    }
+
+        nav a:hover {
+            color: rgba(1,1,1,0.8) !important;
+        }
+
+    .collapse {
+        background-color: rgba(255,255,255,0.7);
+        border-radius: 10px;
+    }
+}
+
 
 .background {
     width: 100%;

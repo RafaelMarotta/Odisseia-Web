@@ -16,3 +16,12 @@
     .btnCollapse:hover {
         cursor: pointer;
     }
+
+.tag-card {
+    height: 45px;
+    margin-top: 5px;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 9px;
+}
