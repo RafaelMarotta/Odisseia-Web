@@ -33,9 +33,9 @@
                                 <h6>TEMPO MÉDIO GASTO: @DateUtils.FormatTimeSpan(report.TimeAverage)</h6>
                             </div>
                         </div>
-                        <div class="row">
-                            <button type="button" class="btn laranja_back white mt-3" onclick="getReportStudent(@report.Id)">VER RESULTADO POR ALUNO</button>
-                        </div>
+                            <div class="row">
+                                <button type="submit" class="btn laranja_back white mt-3">@Html.ActionLink("VER RESULTADO POR ALUNO", "StudentsReports", "Relatorio", new { questId = report.Id }, null)</button>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -53,25 +53,4 @@
         </div>
 
     </div>
-</div>
-
-<div id="ResultStudentCard" hidden>
-
-    <div class="row text-center">
-        <div class="col-md-3">
-            <h6>_StudentName_</h6>
-        </div>
-        <div class="col-md-3">
-            <h6><u>ACERTOS</u></h6>
-            <h5>_RightCount_</h5>
-        </div>
-        <div class="col-md-3">
-            <h6><u>ERROS</u></h6>
-            <h5>_WrongCount_</h5>
-        </div>
-        <div class="col-md-3">
-            <h6>TEMPO GASTO: _TimeSpent_</h6>
-        </div>
-    </div>
-
 </div>

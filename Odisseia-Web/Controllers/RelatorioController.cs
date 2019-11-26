@@ -28,17 +28,17 @@ namespace Controllers
         }
 
         [HttpGet]
-        public async Task<string> StudentsReports(int questId)
+        public async Task<IActionResult> StudentsReports(int questId)
         {
             try
             {
                 UserSessionController.VerifyUser(HttpContext);
-                return await _dataFilter(await DALApi.GET(ApiCommands.BasicReportStudent, questId));
+                IList<BasicReportStudentDTO> studentsReports = await _dataFilter<IList<BasicReportStudentDTO>>(await DALApi.GET(ApiCommands.BasicReportStudent, questId));
+                return View("_View_Report_Students", studentsReports);
             }
             catch (Exception e)
             {
-                await _treatException(e, HttpContext);
-                return "";
+                return await _treatException(e, HttpContext);
             }
         }
     }
