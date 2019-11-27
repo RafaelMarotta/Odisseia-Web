@@ -10,7 +10,7 @@ namespace OdisseiaWeb.DAL
 {
     public class DALApi
     {
-        public static string ApiUri { get; private set; } = "http://ec2-18-217-240-189.us-east-2.compute.amazonaws.com:6001";
+        public static string ApiUri { get; private set; } = "https://odisseia-api.duckdns.org/index.html";
         private static Dictionary<ApiCommands, string> _command = new Dictionary<ApiCommands, string>{
             { ApiCommands.CadastarMissao, "/api/Missao" },
             { ApiCommands.ListarMaterias, "/api/Materia" },

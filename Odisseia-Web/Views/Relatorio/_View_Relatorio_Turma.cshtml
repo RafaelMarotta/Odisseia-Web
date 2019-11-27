@@ -33,14 +33,19 @@
                                 <h6>TEMPO MÉDIO GASTO: @DateUtils.FormatTimeSpan(report.TimeAverage)</h6>
                             </div>
                         </div>
-                            <div class="row">
-                                <button type="submit" class="btn laranja_back white mt-3">@Html.ActionLink("VER RESULTADO POR ALUNO", "StudentsReports", "Relatorio", new { questId = report.Id }, null)</button>
-                            </div>
+                        <div class="row justify-content-center">
+                            @{
+                                var parm = new Dictionary<string, string>{{ "questId", report.Id.ToString()}};
+                            }
+                            <a asp-action="StudentsReports" asp-controller="Relatorio" asp-all-route-data="parm">
+                                <button type="submit" class="btn laranja_back white mt-3">VER RESULTADO POR ALUNO</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         }
-        </div>
+    </div>
     <div class="col-md-8">
 
         <div id="ResultStudent">
