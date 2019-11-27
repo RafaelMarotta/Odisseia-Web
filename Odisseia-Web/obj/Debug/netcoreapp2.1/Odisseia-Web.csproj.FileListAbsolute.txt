@@ -236,3 +236,4 @@ C:\Users\marotta\Desktop\vaiDarBom\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreap
 C:\Users\marotta\Desktop\vaiDarBom\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Odisseia-Web.pdb
 C:\Users\marotta\Desktop\vaiDarBom\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Odisseia-Web.csproj.CopyComplete
 C:\Users\felipe.tertuliano\Desktop\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Razor\Views\Relatorio\_View_Report_Students.cshtml.g.cs
+C:\Users\pimen\Documents\Odisseia-Web\Odisseia-Web\obj\Debug\netcoreapp2.1\Razor\Views\Relatorio\_View_Report_Students.g.cshtml.cs
