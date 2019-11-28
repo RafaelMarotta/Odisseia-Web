@@ -18,8 +18,8 @@
                         <thead>
                             <tr>
                                 <th scope="col">ALUNO</th>
-                                <th scope="col">MÉDIA DE ACERTOS</th>
-                                <th scope="col">MÉDIA DE ERROS</th>
+                                <th scope="col">Nº DE ACERTOS</th>
+                                <th scope="col">Nº DE ERROS</th>
                                 <th scope="col">TEMPO MÉDIO GASTO</th>
                             </tr>
                         </thead>
@@ -28,8 +28,8 @@
                             {
                                 <tr>
                                     <td>@report.StudentName</td>
-                                    <td>@DateUtils.FormatPercentage(report.RightCount)</td>
-                                    <td>@DateUtils.FormatPercentage(report.WrongCount)</td>
+                                    <td>@report.RightCount</td>
+                                    <td>@report.WrongCount</td>
                                     <td>@DateUtils.FormatTimeSpan(report.TimeSpent)</td>
                                 </tr>
                             }
