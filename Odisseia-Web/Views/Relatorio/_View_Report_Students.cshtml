@@ -1,6 +1,43 @@
 ﻿@model IList<Models.Relatorio.BasicReportStudentDTO>
-@using Newtonsoft.Json
+@using Utils;
 
-@JsonConvert.SerializeObject(Model).ToString()
+<link rel="stylesheet" href="~/css/ViewRelatorioTurma.css" />
 
+<div class="row">
+    <div class="col-md">
+        <h4 class="mb-20"><u>RELATÓRIO DE MISSÃO POR ALUNO</u></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @*<h6>MISSÃO: </h6>*@
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">ALUNO</th>
+                                <th scope="col">MÉDIA DE ACERTOS</th>
+                                <th scope="col">MÉDIA DE ERROS</th>
+                                <th scope="col">TEMPO MÉDIO GASTO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Models.Relatorio.BasicReportStudentDTO report in Model)
+                            {
+                                <tr>
+                                    <td>@report.StudentName</td>
+                                    <td>@DateUtils.FormatPercentage(report.RightCount)</td>
+                                    <td>@DateUtils.FormatPercentage(report.WrongCount)</td>
+                                    <td>@DateUtils.FormatTimeSpan(report.TimeSpent)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
