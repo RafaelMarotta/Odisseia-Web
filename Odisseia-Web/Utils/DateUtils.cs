@@ -11,7 +11,7 @@ namespace Utils
 
         public static string FormatPercentage(double average)
         {
-            return (average * 100).ToString() + "%";
+            return (average * 100).ToString("#.#") + "%";
         }
     }
 }
